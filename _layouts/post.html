@@ -26,3 +26,7 @@ comments: true
 {% if site.theme_settings.post_navigation %}
   {% include post_nav.html %}
 {% endif %}
+
+{% if page.comments != false %}
+  {% include disqus.html %}
+{% endif %}
