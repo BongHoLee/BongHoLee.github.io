@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Markdown and HTML
-categories: [Algorithms/Theory, /Algorithms/Theory, Algorithms]
+categories: [Algorithms/Theory, /Algorithms/Theory, /Algorithms, Algorithms, Algorithms/]
 comments: true
 ---
 
