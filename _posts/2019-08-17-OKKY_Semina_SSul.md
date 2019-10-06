@@ -17,7 +17,6 @@ categories: [Insight]
 
 ---
 
-<img src="/assets/img/posts/2019-08-11-nextStep.png" width="100%" height="auto">
 
 
 ### 대학 졸업 후
