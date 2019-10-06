@@ -2,7 +2,7 @@
 layout: post
 title: Dependency(의존성)
 author: Bong5
-categories: [Keywords, JAVA]
+categories: [Keywords, Java]
 ---
 
 ## Dependency(의존성)

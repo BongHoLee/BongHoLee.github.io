@@ -2,12 +2,7 @@
 layout: post
 title: Web Application Deploy (TOMCAT)
 author: Bong5
-category:
-  - Java
-  - Keywords
-  - web-development
-summary: Servlet (2)
-thumbnail: posts/http.png
+categories: [Keywords, Java, WEB/Servlet]
 ---
 
 ## Web Application Deploy (TOMCAT)

@@ -2,7 +2,7 @@
 layout: post
 title: 공유 라이브러리(DDL)
 author: Bong5
-categories: [Keywords, JAVA]
+categories: [Java, Keywords]
 ---
 
 ## Shared Library(DDL)

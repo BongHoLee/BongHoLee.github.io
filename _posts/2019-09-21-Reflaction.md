@@ -2,7 +2,7 @@
 layout: post
 title: Java Reflaction(리플랙션)
 author: Bong5
-categories: [JAVA, Keywords]
+categories: [Java, Keywords]
 ---
 
 ## Reflaction

@@ -2,7 +2,7 @@
 layout: post
 title: Compile & Build
 author: Bong5
-categories: [Keywords, JAVA]
+categories: [Keywords, Java]
 ---
 
 ## Compile & Build
