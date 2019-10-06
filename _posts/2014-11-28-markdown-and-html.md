@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Markdown and HTML
-categories: [Django/Python]
+categories: [Python/Django, Python, Django]
 comments: true
 ---
 
