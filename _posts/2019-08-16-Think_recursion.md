@@ -19,8 +19,6 @@ categories: [Insight, Algorithms/Theory]
 
 ---
 
-<img src="/assets/img/posts/2019-08-11-nextStep.png" width="100%" height="auto">
-
 
 ### 재귀에 대한 고찰
 

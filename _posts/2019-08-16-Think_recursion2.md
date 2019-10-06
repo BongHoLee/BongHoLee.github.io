@@ -18,7 +18,6 @@ __재귀 코드를 보면 절대 흐름을 추적하려 하지 마십시오. 오
 
 ---
 
-<img src="/assets/img/posts/2019-08-11-nextStep.png" width="100%" height="auto">
 
 
 ### 자바 프로그래머에게 재귀는 왜 어려운가?

@@ -13,9 +13,6 @@ categories: [Keywords, JAVA, WEB/Basic]
 
 ---
 
-<img src="/assets/img/posts/Framework.png" width="100%" height="auto">
-
-
 ### **Framework**
 프레임워크에서 가장 중요한 키워드는 **제어의 역전**이다.
 즉 제어의 역전이 적용되어야 비로소 프레임워크의 자격을 갖추었다고 할 수 있겠다.

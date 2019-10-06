@@ -21,12 +21,11 @@ categories: [JAVA, WEB/Servlet, WEB/Basic]
 
 ---
 
-<img src="/assets/img/posts/2019-08-11-nextStep.png" width="100%" height="auto">
 
 
 ### 미니 MVC의 구조.
 
-<img src="/assets/img/posts/Reflaction.jpeg" width="100%" height="auto">
+<img src="/assets/img/Reflaction.jpeg" width="100%" height="auto">
 
 위의 사진 처럼 미니 MVC의 흐름은 다음과 같다.
 

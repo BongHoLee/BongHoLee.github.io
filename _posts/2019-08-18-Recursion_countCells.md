@@ -15,7 +15,6 @@ categories: [Algorithms/Theory]
 
 ---
 
-<img src="/assets/img/posts/2019-08-11-nextStep.png" width="100%" height="auto">
 
 
 ### 재귀의 기초
