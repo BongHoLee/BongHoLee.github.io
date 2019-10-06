@@ -19,7 +19,7 @@ theme_settings:
    Powered by <a href="https://jekyllrb.com/">Jekyll</a>
 
   # Icons
-  rss: true
+  rss: false
   email_address: leebongho9204@gmail.com
   behance:
   bitbucket:
@@ -27,7 +27,7 @@ theme_settings:
   facebook:
   flickr:
   gitlab:
-  github: www.github.com/BongHoLee
+  github: BongHoLee
   gitter:
   google_plus:
   instagram:
