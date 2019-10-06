@@ -1,5 +1,5 @@
 ---
 layout: category
-title: Python/Django
+title: /Python/Django
 permalink: '/Python/Django'
 ---
