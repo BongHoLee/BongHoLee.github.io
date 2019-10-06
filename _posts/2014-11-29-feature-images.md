@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Feature images
-categories: [/Algorithms/Programmers]
+categories: [Algorithms/Programmers]
 comments: true
 feature-img: "assets/img/sample_feature_img.png"
 ---
