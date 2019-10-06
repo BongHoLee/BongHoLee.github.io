@@ -2,7 +2,7 @@
 layout: post
 title: Reflaction 응용
 author: Bong5
-categories: [JAVA, WEB/Servlet, WEB/Basic]
+categories: [Java, WEB/Servlet, WEB/Basic]
 ---
 
 ## Reflaction Application

@@ -2,7 +2,7 @@
 layout: post
 title: 폰 노이만 아키텍쳐
 author: Bong5
-categories: [Keywords, JAVA]
+categories: [Keywords, Java]
 ---
 
 
