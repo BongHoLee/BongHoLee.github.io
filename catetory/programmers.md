@@ -1,5 +1,5 @@
 ---
 layout: category
-title: Python/Programmers
-permalink: '/Python/Programmers'
+title: Algorithms/Programmers
+permalink: '/Algorithms/Programmers'
 ---
