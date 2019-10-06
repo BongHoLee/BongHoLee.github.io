@@ -73,9 +73,10 @@
 			</li>
 			{% endif %}
 			{% endfor %}
+			<!-- Social icons from Font Awesome, if enabled  -->
 			{% include icons.html %}
 
-
+            <!-- Search bar -->
             {% if site.theme_settings.search %}
             <li>
             <form action="{{ site.baseurl }}/search.html" method="get">
@@ -88,6 +89,5 @@
             {% endif %}
 		</ul>
 	</nav>
-
 
 </header>
