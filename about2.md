@@ -1,7 +1,7 @@
 ---
 layout: page
-title: About
-permalink: /about/
+title: About2
+permalink: /about/hehe
 feature-img: "assets/img/sample_feature_img_2.png"
 ---
 
