@@ -1,5 +1,5 @@
 ---
 layout: category
-title: Python/Django
-permalink: '/Python/Django'
+title: Python
+permalink: '/Python'
 ---
