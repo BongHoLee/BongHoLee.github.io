@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [Programmers][완전탐색] 숫자 야구
+title: [Programmers][완전탐색]_숫자야구
 author: Bong5
 categories: [Insight, Algorithms/Programmers]
 ---
@@ -39,9 +39,8 @@ __제한사항__
 2. baseball의 각 행은 [세자리 수, 스트라이크의 수, 볼의 수]를 담고 있습니다.
 
 __입출력 예__
-| baseball | return |
-| :--- | ---: |
-| `[[123, 1, 1], [356, 1, 0], [327, 2, 0], [489, 0, 1]]` | 2 |
+baseball : [[123, 1, 1], [356, 1, 0], [327, 2, 0], [489, 0, 1]] <br>
+return : 2
 
 ---
 
