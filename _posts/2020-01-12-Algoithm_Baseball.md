@@ -1,8 +1,8 @@
 ---
 layout: post
-title: [Programmers][완전탐색]_숫자야구
+title: Programmers_숫자야구
 author: Bong5
-categories: [Insight, Algorithms/Programmers]
+categories: [Algorithms/Programmers]
 ---
 
 ### 문제 설명
