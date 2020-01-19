@@ -52,6 +52,16 @@ blockquote {
   color: #db18be;
   padding: 0 1em;
 }
+.post > .highlight code {
+  font-weight: bold;
+  background-color: GreenYellow;
+}
+
+.post > .highlight pre code {
+  background-color: AliceBlue;
+  color: Blue;
+}
+
 blockquote p:last-child,
 footer p:last-child {
   margin-bottom: 0;
