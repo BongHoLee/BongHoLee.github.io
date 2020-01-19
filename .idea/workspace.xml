@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4e27f66f-d2f6-4486-b3ad-31f69e97d7f7" name="Default Changelist" comment="" />
+    <list default="true" id="4e27f66f-d2f6-4486-b3ad-31f69e97d7f7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/_sass/base/_global.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/base/_global.scss" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +54,7 @@
       <option name="presentableId" value="Default" />
       <updated>1576994403279</updated>
       <workItem from="1576994404655" duration="44000" />
-      <workItem from="1579405705910" duration="6486000" />
+      <workItem from="1579405705910" duration="6697000" />
     </task>
     <servers />
   </component>
