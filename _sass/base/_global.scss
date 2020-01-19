@@ -62,8 +62,9 @@ blockquote {
 }
 
 .post > .highlight pre code {
-  background-color: transparent;
-  color : #ff3465;
+  font-weight: bold;
+  color : blue;
+  background-color: aliceblue;
 }
 
 
@@ -75,10 +76,9 @@ code {
 }
 
 pre code {
-
-  // font-weight: bold;
-  color : #ff3465;
-  background-color: transparent;
+  font-weight: bold;
+  color : blue;
+  background-color: aliceblue;
 }
 
 
