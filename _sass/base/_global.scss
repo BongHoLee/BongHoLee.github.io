@@ -53,16 +53,6 @@ blockquote {
   padding: 0 1em;
 }
 
-code {
-  font-weight: bold;
-  color : #ff3465;
-  background-color: #F0F8FF;
-}
-
-pre code {
-  background-color: #F0F8FF;
-  color : #ff3465;
-}
 
 .post > .highlight code {
   font-weight: bold;
@@ -71,6 +61,18 @@ pre code {
 }
 
 .post > .highlight pre code {
+  background-color: #F0F8FF;
+  color : #ff3465;
+}
+
+
+code {
+  font-weight: bold;
+  color : #ff3465;
+  background-color: #F0F8FF;
+}
+
+pre code {
   background-color: #F0F8FF;
   color : #ff3465;
 }
