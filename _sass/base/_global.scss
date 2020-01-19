@@ -64,6 +64,17 @@ pre code {
   color : #ff3465;
 }
 
+.post > .highlight code {
+  font-weight: bold;
+  color : #ff3465;
+  background-color: #F0F8FF;
+}
+
+.post > .highlight pre code {
+  background-color: #F0F8FF;
+  color : #ff3465;
+}
+
 
 blockquote p:last-child,
 footer p:last-child {
