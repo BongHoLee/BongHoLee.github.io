@@ -50,9 +50,11 @@ blockquote {
   color: #db18be;
   padding: 0 1em;
 }
-.post > .highlight .lineno { color: #ccc; display:inline-block; padding: 0 5px; border-right:1px solid #ccc; }
-.post > .highlight pre code { display: block; white-space: pre; overflow-x: auto; word-wrap: normal; }
 
+.post > .highlight .lineno { color: #ccc; display:inline-block; padding: 0 5px; border-right:1px solid #ccc; }
+pre code { display: block; white-space: pre; overflow-x: auto; word-wrap: normal; }
+
+/*
 code {
   font-weight: bold;
   background-color: GreenYellow;
@@ -62,6 +64,7 @@ pre code {
   background-color: AliceBlue;
   color: Blue;
 }
+*/
 
 blockquote p:last-child,
 footer p:last-child {
