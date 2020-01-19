@@ -46,25 +46,23 @@ h4 {
   font-size: 1.15em;
 }
 blockquote {
-  border-left: .25em solid #db18be;
-  color: #db18be;
+  border-left: .25em solid #383838;
+  color: #383838;
+  background-color: #888888;
   padding: 0 1em;
 }
 
-.post > .highlight .lineno { color: #ccc; display:inline-block; padding: 0 5px; border-right:1px solid #ccc; }
-pre code { display: block; white-space: pre; overflow-x: auto; word-wrap: normal; }
-
-/*
 code {
   font-weight: bold;
-  background-color: GreenYellow;
+  color : #ff3465;
+  background-color: #F0F8FF;
 }
 
 pre code {
-  background-color: AliceBlue;
-  color: Blue;
+  background-color: #F0F8FF;
+  color : #ff3465;
 }
-*/
+
 
 blockquote p:last-child,
 footer p:last-child {
