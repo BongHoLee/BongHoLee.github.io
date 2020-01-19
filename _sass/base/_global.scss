@@ -51,6 +51,7 @@ blockquote {
   color: #0086B3;
   background-color: ghostwhite;
   padding: 0 1em;
+
 }
 
 
@@ -67,14 +68,17 @@ blockquote {
 
 
 code {
-  font-weight: bold;
+
+  // font-weight: bold;
   color : #ff3465;
-  background-color: #F0F8FF;
+  background-color: transparent;
 }
 
 pre code {
-  background-color: #F0F8FF;
+
+  // font-weight: bold;
   color : #ff3465;
+  background-color: transparent;
 }
 
 
