@@ -34,7 +34,6 @@ article,
 aside,
 details,
 figcaption,
-figure,
 footer,
 header,
 hgroup,
@@ -202,6 +201,8 @@ svg:not(:root) {
 
 figure {
   margin: 1em 40px;
+  font-weight: bold;
+  background-color: GreenYellow;
 }
 
 /**
