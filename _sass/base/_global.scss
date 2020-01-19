@@ -48,8 +48,9 @@ h4 {
   font-size: 1.15em;
 }
 blockquote {
-    border-left: 2px solid;
-    padding: 1em 1em;
+  border-left: .25em solid #dfe2e5;
+  color: #6a737d;
+  padding: 0 1em;
 }
 blockquote p:last-child,
 footer p:last-child {
