@@ -44,6 +44,10 @@ theme_settings:
 
   # Scripts
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
+    provider : "google-gtag"
+    google :
+      tracking_id : "UA-157033821-1"
+      anonymize_ip : #true, false (default)
   disqus_shortname:
   katex: true # Enable if using math markup
   search: true # Enable the search feature
