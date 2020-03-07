@@ -48,7 +48,7 @@ Daum 뉴스의 개발업무를 맡게 된 신입사원 튜브는 사용자들이
 
 **_예제 입출력_**
 
-| str1 |	str2 | answer
+| str1 |	str2 | answer|
 |---|---|---|
 | FRANCE | franch | | 16384 |
 | handshake | shake hands | | 65536 |
