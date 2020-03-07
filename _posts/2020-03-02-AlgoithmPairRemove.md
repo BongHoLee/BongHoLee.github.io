@@ -65,7 +65,10 @@ b aa baa -> bb aa -> aa ->
 
 ### Code
 
-<script src="https://gist.github.com/BongHoLee/c39c42f83f2b0112651f348b5c97fb06.js"></script>
+<script src="https://gist.github.com/BongHoLee/c39c42f83f2b0112651f348b5c97fb06.js"></script>  
+
+
+
 
 `Stack`을 활용하여 문제해결을 해야함을 캐치해야하는 문제이다.
 
