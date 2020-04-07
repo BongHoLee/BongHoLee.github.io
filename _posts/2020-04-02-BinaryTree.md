@@ -14,7 +14,7 @@ categories: [Algorithms/Theory]
   - 디렉토리와 서브디렉토리 구조
   - 가계도
 
-<img src="/assets/img/tree1.png" width="100%" height="auto">
+<img src="/assets/img/tree1.PNG" width="100%" height="auto">
 
 ---
 
@@ -37,16 +37,16 @@ categories: [Algorithms/Theory]
 ### 이진 트리의 응용
 
 **_1. Expression Tree_**
-<img src="/assets/img/tree2.png" width="100%" height="auto">
+<img src="/assets/img/tree2.PNG" width="100%" height="auto">
 
 **_2. Huffman code_**
-<img src="/assets/img/tree3.png" width="100%" height="auto">
+<img src="/assets/img/tree3.PNG" width="100%" height="auto">
 
 ---
 
 ## Full and Complete Binary trees
 
-<img src="/assets/img/tree4.png" width="100%" height="auto">
+<img src="/assets/img/tree4.PNG" width="100%" height="auto">
 
 `Full Binary Tree`는 모든 노드가 `0개 또는 2개`의 자식 노드를 갖는 트리를 말한다.
 
@@ -58,11 +58,11 @@ categories: [Algorithms/Theory]
 
 **_이진 트리의 연결 구조 표현_**
 
-<img src="/assets/img/tree5.png" width="100%" height="auto">
+<img src="/assets/img/tree5.PNG" width="100%" height="auto">
 
 일반적인 이진트리를 표현할 때 연결구조(Linked Structure)로 표현한다. 단 `규칙성이 존재`하는 `Full Binary Tree`, `Complete Binary Tree`, `Binary Heap` 등은 `일차원 배열로 표현 가능`하다. 여기서 말하는 `규칙성`이란 왼쪽 자식, 오른쪽 자식 모두 존재하거나 자식이 아예 존재하지 않기 때문에 배열의 인덱스로 충분히 표현이 가능하다.
 
-<img src="/assets/img/tree6.png" width="100%" height="auto">
+<img src="/assets/img/tree6.PNG" width="100%" height="auto">
 
 위 그림은 규칙성이 존재하는 `Binary Heap`을 트리 구조와 배열로 표현한 그림이다. `인덱스`만 보면 누구의 부모/자식인지 판별 가능하므로 불필요하게 트리 노드를 구현할 필요가 없다.
 
