@@ -33,7 +33,7 @@ categories: [Algorithms/Programmers]
 #### 입출력 예제
 
 | s | result |
-|---|---|---|---|---|
+|---|---|
 | aabbaccc | 7 |
 | ababcdcdababcdcd | 9 |
 | abcabcdede | 8 |
