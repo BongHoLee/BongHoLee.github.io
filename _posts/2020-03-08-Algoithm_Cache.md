@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Programmers(KAKAO) 프렌즈 4블록
+title: Programmers(KAKAO) 캐시
 author: Bong5
 categories: [Algorithms/Programmers]
 ---
