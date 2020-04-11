@@ -195,10 +195,11 @@ categories: [Algorithms/Theory]
 - y: 실제로 삭제할 노드 (자식이 0개이거나 1개 -> successor)
 
 
+---
 
+## BST의 SEARCH, INSERT, DELETE 구현
 
-
-
+<script src="https://gist.github.com/BongHoLee/a6896b77c2efcc1649d9d101a1d4586c.js"></script>
 
 
 
