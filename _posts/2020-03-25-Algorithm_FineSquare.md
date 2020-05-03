@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Programmers(KAKAO) 2020_문자열_압축
+title: Programmers 올바른 정사각형
 author: Bong5
 categories: [Algorithms/Programmers]
 ---
@@ -57,7 +57,7 @@ categories: [Algorithms/Programmers]
 
 다음으로 이렇게 최소한으로 쪼개진 사각형에서 대각선을 지나는 부분 사각형의 갯수를 구하면 문제 해결을 위한 패턴 찾기는 완료가 된다.
 
-최소한으로 쪼개진 사각형에서의 대각선을 지나는 부분 사각형 갯수는 간단하게 `W + H - 1` 패턴을 갖는다. 
+최소한으로 쪼개진 사각형에서의 대각선을 지나는 부분 사각형 갯수는 간단하게 `W + H - 1` 패턴을 갖는다.
 
 이제 최소한으로 쪼개진 사각형에서 부분사각형 값을 찾았으므로 최종 결과는 나누어 주었던 최대공약수를 다시 곱해주면 원하는 결과를 얻을 수 있다.
 
