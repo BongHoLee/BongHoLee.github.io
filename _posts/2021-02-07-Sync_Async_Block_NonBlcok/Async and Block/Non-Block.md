@@ -5,6 +5,8 @@ author: Bong5
 categories: [Keywords]
 ---
 
+## 동기/비동기? 블로킹/논블로킹?
+
 최근 `Reactive Programming`에 대한 관심이 많아지면서 기반 기술에 대한 이해를 위해 먼저 `Sync/Async`, `Blocking/Non-Blocking`에 대한 학습이 필요함을 느꼈다.
 
 설명하는 사람들 마다 관점이 조금씩 다르고 헷갈리는 이 개념들에 대해 그나마 내가 가장 잘 이해할 수 있게끔 정리가 되어있는 블로그를 토대로 정리해보려고 한다.
@@ -140,7 +142,7 @@ categories: [Keywords]
 ### Synchronous/Asynchronous는 호출되는 함수의 작업 완료 여부를 누가 신경쓰냐가 관심사
 
 > 호출되는 함수의 작업 완료를 호출한 함수가 신경쓰면 Synchronous
-> 호출되는 함수의 작업 완료를 호출된 함수가 신경쓰면(callback 호출 등) Asynchronous
+> 호출되는 함수의 작업 완료를 호출된 함수가 신경쓰면(callback 호출) Asynchronous
 > 성능과 자원의 효율적 사용 관점에서 가장 유리한 모델은 Async-NonBlocking 모델이다.
 
 ### 참고 및 출처
