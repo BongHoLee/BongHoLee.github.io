@@ -7,62 +7,65 @@ categories: [/Others/PoC]
 
 ## 들어가며
 
-업무에서 `Logstash`를 활용할 일이 생겨 개략적으로 학습했던 내용을 기록하려고 한다.
+업무에서 `Logstash`를 활용한 `데이터 전달자(SBDS)`, `데이터 사용자(User)` 구축 설계에 대한 테스트를 진행하였다.
 
-컨셉과 기본 개념은 좋은 자료들이 많아서 굳이 다루지 않고, 개인적으로 기억해야 할 내용들에 대해서만 개괄적으로 기록한다.
+진행 중 발생했던 이슈와 해결 방법을 위주로 기록한다.
 
-보다 자세한 내용과 자료는 페이지 최하단의 `참고 및 출처`를 확인하면 된다.
+## SBDS ~ USER 설계
 
-## Logstash
+<img src="/assets/img/poc/logstash.PNG" width="100%" height="auto">
 
-- `데이터 수집 및 처리`를 위한 `파이프라인`을 갖는 `Data Flow` 처리기
+전체적인 구조는 위 그림과 같다.
 
-- `Input` ~ `Filter` ~ `Output`으로 이뤄지는 프로세스 처리
+- **Data SBDS** : DB 또는 File로부터 Data를 읽어들이고 `User`에게 `TCP`로 데이터를 전달하는 역할을 수행한다.
+- **Data User** : `SBDS`로부터 데이터를 `TCP`로 읽어들이고 읽어들인 데이터를 지정한 경로에 `File` 형태로 저장한다.
 
-- 각 단계에서는 다양한 `Plugin`이 적용 가능하다.
-
-- 하나의 Logstash Instance에 여러 pipeline 구축 가능 (`Multi Pipelines`)
-
-- `Multiple Input, Multiple Output` 가능
-
-- `Persistant Queue`로 설정 가능
-  - 기본적으로는 `in-memory queue`로 설정되어 활용되기 때문에 장애에 취약한 부분이 있음
-  - `Persistant Queue`로 활용함으로써 Input Data가 `Disk`에 저장되고 프로세서 처리 및 출력이 완료되고 난 뒤 `Persistant Queue`에 통지하는 방식이 가능
-    - 만일 중간에 서버가 Shutdown 되는 등의 상황이 발생하게 되면 logstash 재시작 시 `Disk`에서 **아직 통지되지 않은 데이터를 재활용 가능(데이터 유실 X)**
+여러 방안을 모색한 결과 `SBDS`와 `User`를 모두 `Logstash`로 구축하는 방향으로 결정하였다.
 
 
-## Logstash 설정 파일들
+## SBDS ~ USER 설정
 
-`Logstash`는 두 가지 타입의 `Configuration file`이 있다.
+`Logstash`를 활용하여 진행하기 때문에 중요한 것은 `SBDS`, `USER` 모두 파이프라인 설정 파일(`.conf`)와 Setting 파일(`logstash.yml` or `pipeline.yml`)만 신경써주면 된다.
 
-- **Pipeline Configuration Files(파이프라인 처리에 대해 정의)**
-- **Settings Files(시작과 실행에 대한 옵션을 정의)**
+- **Data SBDS**
+  - `input` : JDBC 플러그인 사용
+  - `filter` : 아직 해당 없음
+  - `output` : TCP, json codec으로 `USER`에게 전송
+- **Data User**
+  - `input` : TCP 플러그인 사용
+  - `filter` : 아직 해당 없음
+  - `output` : stdout, file write로 결과 테스트
 
-여기서 `Pipeline Configuration Files`는 사용자 정의 파일로써, 일반적으로 `xxx.conf` 와 같은 이름을 갖는다.
+한 사이클이 제대로 수행되는지에 대한 개념증명 정도의 테스트였기 때문에 디테일한 설정은 아직 필요 없다고 판단하고 진행하였다.
 
-그리고 `Settings Files`는 두 개의 파일로써 `logstash.yml`과 `pipeline.yml`파일이다.
+## Issue
 
-1. **Pipeline Configuration Files**
-  - `.conf` 파일로써 유저가 직접 생성한다. 파이프라인 프로세스 처리, 즉 `Input` ~ `Filter` ~ `Output`에 대하여 기술한 파일이다.
-2. **Settings Files**
-  - **config/logstash.yml**
-    - `logstash`의 실행 제어를 위한 `옵션 설정 파일`이다.
-    - pipeline 설정, configuration file 위치, 로깅 옵션 등과 같이 다양한 기본 설정이 가능하다.
-    - `logstash` 실행 시 별도의 옵션을 주는 것과 같이 해당 파일에 기술하면 적용된다.
+원인을 알 수 없는 이슈가 발생하였다. 분명 `SBDS`는 `JDBC Plugin`으로 정상적으로 데이터를 읽어오는데 `SBDS의 Output`이 문제인건지 `User의 Input`이 문제인건지 데이터 전달이 안되는 이슈가발생했다.
 
-  - **config/pipeline.yml**
-    - 기본적으로 `One instance, Multiple pipelines`를 위해 사용하는 설정 파일이다.
-    - 파이프라인의 개수, 각 파이프라인의 ID, 각 파이프 라인의 conf 파일 등을 설정한다.
-    - 명시적으로 설정되지 않은 설정 값들은 `logstash.yml` 파일에 지정된 기본 값으로 재설정된다.
-    - `logstash`를 시작할 때 아무런 옵션 인자 없이 실행하면 자동으로 `pipeline.yml` 파일을 읽는다. 만일 읽지 않게끔 하려면 `-f`, `-e`와 같은 옵션을 주어 실행한다.
+몇 가지의 가능성을 두고 테스트를 해봤다.
+
+1. **SBDS가 OUTPUT 하는 데이터의 크기가 워낙 커서 제대로 전송이 안된다?**
+  - 1개 데이터에 대해서 테스트해 보았지만 똑같은 현상이다.
+2. **Data SBDS, Data User의 .conf 설정에서 TCP 플러그인 설정이 제대로 안되었다?**
+  - 공식 홈페이지와 구글의 사례를 그대로 적용해서 진행하였다.
+
+계속 트러블 슈팅을 진행하던 중 특이한 현상이 발생했다. **SBDS를 Shutdown 하면 버퍼에 있던 Data를 한번에 User에게 Flush 하는 현상을 보였다.**
+
+그러니까 `SBDS`가 `Data Source`로부터 데이터를 읽고 `Buffer`에 데이터를 남겨두었다가 종료 시에 `Flush`하는 것 처럼 보였다.
+
+로그를 봐도 `Exception`이나 `Error`처럼 보이는 로그가 없어서 `Logstash`가 처음부터 이렇게 만들어진게 아닐까 하는 의심이 들었다.
+
+그러던 와중 `Logstash To Logstatsh TCP` 키워드로 검색한 결과 공식 홈페이지의 `Discuss` 내용 중 똑같은 현상에 대한 게시글이 있었다.
+
+내용인 즉 **Output TCP** 인 경우에 `new line(\n)`이 식별되어야 `flush`를 한다는 것 같다.
+
+**codec => json** 인 경우, 별도의 `new line(\n)` 없이 쭉 이어진 json string 데이터를 내보내려 하기 때문에 `new line`이 올 때 까지 `Buffer`에 계속해서 쌓아두고, 결국 `SBDS`가 종료할 때에 `buffer flush`를 한 번 해주는 것 같다.
+
+이에 따라 **codec => json_lines** 로 수정한 이후엔 정상 수행이 된다. `json_lines`의 경우에는 기본적으로 json string 마지막에 `\n`을 포함한다는 것 같다.
 
 
-## JDBC Plugin의 한계
-
-- DB 별 드라이버 설치가 필요하다.
-- **Polling을 1초 단위로밖에 하지 못한다. Cron 스케쥴러 표현식 사용**
 
 
 ### 참고 및 출처
 
-- [공식 홈페이지 한글 영상](https://www.elastic.co/kr/webinars/getting-started-logstash)
+- [공식 홈페이지 TCP issue discuss](https://discuss.elastic.co/t/logstash-to-logstash-via-tcp-is-slow-delayed-waiting-for-something/173299)
