@@ -49,6 +49,7 @@ categories: [Others/PoC]
     - `logstash`의 실행 제어를 위한 `옵션 설정 파일`이다.
     - pipeline 설정, configuration file 위치, 로깅 옵션 등과 같이 다양한 기본 설정이 가능하다.
     - `logstash` 실행 시 별도의 옵션을 주는 것과 같이 해당 파일에 기술하면 적용된다.
+
   - **config/pipeline.yml**
     - 기본적으로 `One instance, Multiple pipelines`를 위해 사용하는 설정 파일이다.
     - 파이프라인의 개수, 각 파이프라인의 ID, 각 파이프 라인의 conf 파일 등을 설정한다.
