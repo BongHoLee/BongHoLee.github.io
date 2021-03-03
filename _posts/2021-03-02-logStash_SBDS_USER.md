@@ -2,7 +2,7 @@
 layout: post
 title: Logstash to Logstash (TCP) 트러블슈팅
 author: Bong5
-categories: [/Others/PoC]
+categories: [Others/PoC]
 ---
 
 ## 들어가며
