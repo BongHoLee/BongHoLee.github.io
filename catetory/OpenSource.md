@@ -1,5 +1,5 @@
 ---
 layout: category
-title: OpenSource
+title: Others/OpenSource
 permalink: '/Others/OpenSource'
 ---
