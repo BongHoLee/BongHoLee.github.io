@@ -59,15 +59,7 @@ categories: [Keywords, WEB/Spring_Framework]
     - `캐싱` 대상이 되는 메서드를 지정한다. 그러면 해당 `메서드` 실행 시 결과를 `캐시`에 저장하고 이후 **동일한 `arguments`**로 재호출 시 **실제 메서드를 실행하지 않고 캐싱된 결과가 반환된다.**
     - 이 어노테이션에는 캐싱 데이터 구분을 위한 `이름`이 필요하다.
 
-```java
-// 한 개의 캐시 사용.
-@Cacheable("books")
-public Book findBook(ISBN isbn) {...}
-
-// 두 개의 캐시 사용.
-@Cacheable({"books", "isbns"})
-public Book findBook(ISBN isbn) {...}
-```
+<script src="https://gist.github.com/BongHoLee/bcdeecddf1d4d8cbdbae84acb40c2be5.js"></script>
 
 `findBook` 메서드는 `books`라는 **캐시 이름**과 연동된다. 메서드 호출 시 마다 캐시는 **이미 호출이 되어서 반복 호출할 필요가 없는지**를 확인한다.
 
@@ -95,11 +87,7 @@ public Book findBook(ISBN isbn) {...}
 
 이를테면 **메서드에 여러 인자가 존재하지만 이 중 일부 인자만 캐싱에 사용되는 경우**를 들 수 있다.
 
-```java
-// 책을 찾는데 창고 확인, 중고 포함 여부를 인자로 던짐
-@Cacheable("books")
-public Book findBook(ISBN isbn, boolean checkWarehouse, boolean includeUsed)
-```
+<script src="https://gist.github.com/BongHoLee/72954428f5a798cf66b9263e41fd8a3a.js"></script>
 
 위 메서드 인자를 보면, **두 개의 `boolean` 변수가 존재**하지만 `캐싱`에 사용되지는 않는다. (`equals()`, `hashCode()`를 구현하지 않는 인자이기 때문에)
 
@@ -109,32 +97,17 @@ public Book findBook(ISBN isbn, boolean checkWarehouse, boolean includeUsed)
 
 `SpEL`을 사용해서 `캐싱을 위해 사용될 파라미터`를 선택하거나 어떤 연산을 사용하거나, 임의의 메서드 실행 결과를 `key`의 구성으로 사용할 수 있다.
 
-```java
-@Cacheable(value="books", key="#isbn")
-public Book findBook(ISBN isbn, boolean checkWarehouse, boolean includeUsed)
-
-@Cacheable(value="books", key="#isbn.rawNumber")
-public Book findBook(ISBN isbn, boolean checkWarehouse, boolean includeUsed)
-
-@Cacheable(value="books", key="T(someType).hash(#isbn)")
-public Book findBook(ISBN isbn, boolean checkWarehouse, boolean includeUsed)
-```
+<script src="https://gist.github.com/BongHoLee/f947604524f8a5017dda3f208b3fb6ff.js"></script>
 
 ### 캐싱 조건 설정
 
 캐시 어노테이션은 `SpEL` 기반의 파라미터를 이용하여 조건을 설정할 수 있다. 만일 설정된 조건이 `true`면 **캐싱**이 되고 `false`면 캐싱되지 않는다.
 
-```java
-@Cacheable(value="books", condition="#name.length() < 32")
-public Book findBook(String name)
-```
+<script src="https://gist.github.com/BongHoLee/386af96d2390c9623e5dd8cb5283e6ab.js"></script>
 
 또한 `unless` 키워드를 활용해서 조건을 추가할 수 있다. 단, `unless`는 **메서드 실행 이후**에 조건 검사를 실행하여 **캐싱 여부**를 결정한다.
 
-```java
-@Cacheable(value="books", condition="#name.length() < 32", unless="#result.hardback")
-public Book findBook(String name)
-```
+<script src="https://gist.github.com/BongHoLee/334e70b7e88f26acbddea79adc224b69.js"></script>
 
 위 예제에서 인자로 전달된 `name`의 길이가 `32` 미만인 경우, 결과 `Book 인스턴스`의 `hardback`의 상태가 `true`라면 캐싱을 하고 아니라면 캐싱을 하지 않는다.
 
@@ -144,19 +117,13 @@ public Book findBook(String name)
 
 `@CachePut` 어노테이션이 선언된 메서드는 항상 실행되고, 그 결과는 `캐시`에 반영이 된다.
 
-```java
-@CachePut(value="books", key="#isbn")
-public Book updateBook(ISBN isbn, BookDescriptor descriptor)
-```
+<script src="https://gist.github.com/BongHoLee/47c2877af3e976feecaf876c3b12bea1.js"></script>
 
 ## @CacheEvict 어노테이션
 
 `cache abstraction`은 `캐시 저장`뿐 아니라 `캐시 제거`도 지원한다. 이 기능은 **캐시 내 오래되어 필요 없어진 데이터** 제거에 유용하다.
 
-```java
-@CacheEvict(value="books", allEntires=true)
-public void loadBooks(InputStream batch)
-```
+<script src="https://gist.github.com/BongHoLee/3ca00d67ed52179e9f526793fae47180.js"></script>
 
 `allEntries` 키워드는 **캐시 내 모든 데이터 제거**에 유용하다.
 
@@ -166,11 +133,4 @@ public void loadBooks(InputStream batch)
 
 이 어노테이션이 선언된 클래스의 내부 요소들은 **캐시 설정(캐시 이름 등)**을 공유한다.
 
-```java
-@CacheConfig(cacheNames={"books"})
-public class BookRepositoryImpl implements BookRepository {
-
-    @Cacheable
-    public Book findBook(ISBN isbn) {...}
-}
-```
+<script src="https://gist.github.com/BongHoLee/b8d108f42dbbdbcb16b781c74d4c5734.js"></script>
