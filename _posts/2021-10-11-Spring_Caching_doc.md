@@ -2,7 +2,7 @@
 layout: post
 title: Spring Cache 기본
 author: Bong5
-categories: [Keywords, WEB/Spring_Framework]
+categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 ---
 
 ## Spring Cache
