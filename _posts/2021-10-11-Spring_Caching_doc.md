@@ -7,8 +7,6 @@ categories: [Keywords, WEB/Spring_Framework]
 
 ## Spring Cache
 
-
-
 ---
 
 ### Cache abstraction에 대한 이해
@@ -44,12 +42,16 @@ categories: [Keywords, WEB/Spring_Framework]
 > **중요**: `Caching abstraction`은 멀티 프로세스, 멀티 스레드를 다루기 위한 별도의 환경을 제공하지 않기 때문에 `구현체`에서 해결해야 한다.
 >
 
+<br>
+
 ### 유의
 
 `캐시 추상화`을 사용하기 위해서 개발자는 다음의 두 가지를 유의해야 한다.
 
 - **Caching declaration** : 캐싱을 하기 위한 `메서드`를 식별
 - **Cache configuration** : 캐시를 `읽고 저장`할 `데이터 스토리지` 마련
+
+<br>
 
 ### 어노테이션 기반의 Cache Declaration
 
@@ -67,6 +69,8 @@ categories: [Keywords, WEB/Spring_Framework]
 
 그런 경우 `findBook` 호출 시 마다 **해당 캐시들(books, isbns)을 모두 확인**하는 과정을 거친다. 이 중 **만일 하나라도 캐싱된 데이터가 존재한다면(`hit`) 해당 데이터가 반환된다.**
 
+<br>
+
 ### Default Key 생성
 
 `cache`는 기본적으로 `key-value` 저장소이기 때문에, 캐싱된 메서드 호출 시 **캐시에 접근하기 위한 `key`**가 필요하다.
@@ -80,6 +84,8 @@ categories: [Keywords, WEB/Spring_Framework]
 만일 각 파라미터들이 `hashCode()`, `eqauls()`를 구현한다면 이상 없이 잘 동작하지만, 그렇지 않은 경우 별도의 알고리즘을 사용해야한다.
 
 별도의 알고리즘 구현을 위해 `org.springframework.cache.interceptor.KeyGenerator` interface를 제공한다.
+
+<br>
 
 ### Caching key 지정
 
@@ -99,6 +105,8 @@ categories: [Keywords, WEB/Spring_Framework]
 
 <script src="https://gist.github.com/BongHoLee/f947604524f8a5017dda3f208b3fb6ff.js"></script>
 
+<br>
+
 ### 캐싱 조건 설정
 
 캐시 어노테이션은 `SpEL` 기반의 파라미터를 이용하여 조건을 설정할 수 있다. 만일 설정된 조건이 `true`면 **캐싱**이 되고 `false`면 캐싱되지 않는다.
@@ -111,6 +119,8 @@ categories: [Keywords, WEB/Spring_Framework]
 
 위 예제에서 인자로 전달된 `name`의 길이가 `32` 미만인 경우, 결과 `Book 인스턴스`의 `hardback`의 상태가 `true`라면 캐싱을 하고 아니라면 캐싱을 하지 않는다.
 
+<br>
+
 ## @CachePut 어노테이션
 
 어떤 메서드 실행 시 `cache 업데이트`가 필요할 때 `@CachePut` 어노테이션을 사용할 수 있다.
@@ -118,6 +128,8 @@ categories: [Keywords, WEB/Spring_Framework]
 `@CachePut` 어노테이션이 선언된 메서드는 항상 실행되고, 그 결과는 `캐시`에 반영이 된다.
 
 <script src="https://gist.github.com/BongHoLee/47c2877af3e976feecaf876c3b12bea1.js"></script>
+
+<br>
 
 ## @CacheEvict 어노테이션
 
@@ -127,6 +139,8 @@ categories: [Keywords, WEB/Spring_Framework]
 
 `allEntries` 키워드는 **캐시 내 모든 데이터 제거**에 유용하다.
 
+<br>
+
 ### @CacheConfig 어노테이션
 
 메서드 단위가 아닌 **클래스 단위**로 캐싱 설정을 하고 싶다면 `@CacheConfig`가 유용하다.
@@ -134,6 +148,8 @@ categories: [Keywords, WEB/Spring_Framework]
 이 어노테이션이 선언된 클래스의 내부 요소들은 **캐시 설정(캐시 이름 등)**을 공유한다.
 
 <script src="https://gist.github.com/BongHoLee/b8d108f42dbbdbcb16b781c74d4c5734.js"></script>
+
+<br>
 
 ### 참고
 
