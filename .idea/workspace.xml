@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e27f66f-d2f6-4486-b3ad-31f69e97d7f7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/_posts/2021-10-11-Spring_Caching_doc.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-10-11-Spring_Caching_doc.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_posts/2021-10-11-@Configuration.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +37,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/_posts" />
+      <recent name="$PROJECT_DIR$/catetory" />
       <recent name="$PROJECT_DIR$/_sass" />
     </key>
   </component>
@@ -54,7 +55,7 @@
       <workItem from="1576994404655" duration="44000" />
       <workItem from="1579405705910" duration="6937000" />
       <workItem from="1631419526213" duration="2430000" />
-      <workItem from="1633934380945" duration="900000" />
+      <workItem from="1633934380945" duration="1206000" />
     </task>
     <task id="LOCAL-00001" summary="identical">
       <created>1631420324896</created>
@@ -91,7 +92,21 @@
       <option name="project" value="LOCAL" />
       <updated>1633935098954</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="spring caching">
+      <created>1633935969422</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1633935969422</updated>
+    </task>
+    <task id="LOCAL-00007" summary="spring caching">
+      <created>1633936154112</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1633936154112</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
