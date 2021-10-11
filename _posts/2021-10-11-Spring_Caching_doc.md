@@ -53,6 +53,21 @@ categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 
 <br>
 
+### @EnableCaching
+
+스프링의 **어노테이션 기반 cache management 기능을 활성화 시킨다.**
+
+`@EnableCaching`과 `@Configuration`은 아래와 같이 함께 사용 가능하다.
+
+<script src="https://gist.github.com/BongHoLee/2309a4461dd9094ff69c4a6b34efd57a.js"></script>
+
+`@EnableCaching`은 `CacheInterceptor`, `Proxy-`, `AspectJ-based`와 같이 **@Cacheable 메서드가 호출될 때 인터셉터를 call-stack에 삽입**하는 **어노테이션 기반 cache 지원 컴포넌트**들을 구성하고 빈으로 등록할 책임이 있다.
+
+- `CacheInterceptor`, `Proxy-`, `Aspect-J`와 같은 녀석들은 `Cacheable` 메서드가 호출되면 바이트코드를 조작하는 등의 기법을 통해 **인터셉터를 call-stack에 삽입**함으로써 추가 로직이 실행되도록 한다.
+- 그리고 위와 같은 녀석들이 **어노테이션 기반의 cache 컴포넌트**인데, 이런 녀석들을 **스프링 컴포넌트로 구성하고 빈으로 등록**하는 책임을 `@EnableCaching`이 담당한다.
+
+<br>
+
 ### 어노테이션 기반의 Cache Declaration
 
 캐시 선언을 위해서 `abstraction`은 몇 가지의 자바 어노테이션을 제공한다.

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4e27f66f-d2f6-4486-b3ad-31f69e97d7f7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/_posts/2021-10-11-@Configuration.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2021-10-11-Configuration.md" afterDir="false" />
-    </list>
+    <list default="true" id="4e27f66f-d2f6-4486-b3ad-31f69e97d7f7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,7 +53,7 @@
       <workItem from="1576994404655" duration="44000" />
       <workItem from="1579405705910" duration="6937000" />
       <workItem from="1631419526213" duration="2430000" />
-      <workItem from="1633934380945" duration="1548000" />
+      <workItem from="1633934380945" duration="1874000" />
     </task>
     <task id="LOCAL-00001" summary="identical">
       <created>1631420324896</created>
@@ -113,7 +111,28 @@
       <option name="project" value="LOCAL" />
       <updated>1633936399103</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="@Configuartion">
+      <created>1633936695702</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1633936695702</updated>
+    </task>
+    <task id="LOCAL-00010" summary="@Configuartion">
+      <created>1633936758759</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1633936758759</updated>
+    </task>
+    <task id="LOCAL-00011" summary="@Configuartion">
+      <created>1633936885065</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1633936885065</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
