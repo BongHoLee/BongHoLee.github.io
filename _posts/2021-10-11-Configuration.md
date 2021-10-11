@@ -1,6 +1,6 @@
 ---
 layout: post
-title: `@Configuration`에 관하여 (feat.CGLIB)
+title: 스프링 @Configuration에 관하여 (feat.CGLIB)
 author: Bong5
 categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 ---
