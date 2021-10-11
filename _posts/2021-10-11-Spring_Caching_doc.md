@@ -66,6 +66,8 @@ categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 - `CacheInterceptor`, `Proxy-`, `Aspect-J`와 같은 녀석들은 `Cacheable` 메서드가 호출되면 바이트코드를 조작하는 등의 기법을 통해 **인터셉터를 call-stack에 삽입**함으로써 추가 로직이 실행되도록 한다.
 - 그리고 위와 같은 녀석들이 **어노테이션 기반의 cache 컴포넌트**인데, 이런 녀석들을 **스프링 컴포넌트로 구성하고 빈으로 등록**하는 책임을 `@EnableCaching`이 담당한다.
 
+> **인용** : The @EnableCaching annotation triggers a post-processor that inspects every Spring bean for the presence of caching annotations on public methods. If such an annotation is found, a proxy is automatically created to intercept the method call and handle the caching behavior accordingly.
+
 <br>
 
 ### 어노테이션 기반의 Cache Declaration
