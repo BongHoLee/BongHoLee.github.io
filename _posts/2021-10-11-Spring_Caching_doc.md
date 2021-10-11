@@ -134,3 +134,8 @@ categories: [Keywords, WEB/Spring_Framework]
 이 어노테이션이 선언된 클래스의 내부 요소들은 **캐시 설정(캐시 이름 등)**을 공유한다.
 
 <script src="https://gist.github.com/BongHoLee/b8d108f42dbbdbcb16b781c74d4c5734.js"></script>
+
+### 참고
+
+- [https://docs.spring.io/spring-framework/docs/4.3.15.RELEASE/spring-framework-reference/html/cache.html](https://docs.spring.io/spring-framework/docs/4.3.15.RELEASE/spring-framework-reference/html/cache.html)
+- [https://www.baeldung.com/spring-cache-tutorial](https://www.baeldung.com/spring-cache-tutorial)
