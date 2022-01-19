@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4e27f66f-d2f6-4486-b3ad-31f69e97d7f7" name="Default Changelist" comment="" />
+    <list default="true" id="4e27f66f-d2f6-4486-b3ad-31f69e97d7f7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/_posts/2022-01-19-Kotlin_함수형_프로그래밍.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +33,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/_posts" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -42,6 +44,19 @@
       <recent name="$PROJECT_DIR$/catetory" />
       <recent name="$PROJECT_DIR$/_sass" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -59,7 +74,7 @@
       <workItem from="1631419526213" duration="2430000" />
       <workItem from="1633934380945" duration="1874000" />
       <workItem from="1633939698027" duration="335000" />
-      <workItem from="1644299363944" duration="387000" />
+      <workItem from="1644299363944" duration="694000" />
     </task>
     <task id="LOCAL-00001" summary="identical">
       <created>1631420324896</created>
