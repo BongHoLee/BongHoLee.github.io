@@ -1,5 +1,5 @@
 ---
 layout: category
-title: Programing_Language/Kotlin
+title: ProgramingLanguage/Kotlin
 permalink: '/Programing_Language/Kotlin'
 ---
