@@ -2,7 +2,7 @@
 layout: post
 title: Kotlin - MyBatis
 author: Bong5
-categories: [Keywords, ProgramingLanguage/Kotlin, ]
+categories: [Keywords, ProgramingLanguage/Kotlin]
 --- 
 
 ## Kotlin - MyBatis
