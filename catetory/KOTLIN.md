@@ -1,5 +1,5 @@
 ---
 layout: category
-title: Java
-permalink: '/Kotlin'
+title: Programing_Language/Kotlin
+permalink: '/Programing_Language/Kotlin'
 ---
