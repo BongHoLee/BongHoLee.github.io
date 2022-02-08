@@ -74,7 +74,7 @@ categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 
 따라서 `myBook 빈`의 `Author`, `Title`의 인스턴스와 `myMagazine 빈`의 `Author`, `Title`의 인스턴스는 **스프링 빈이 아닌 서로 다른 일반 인스턴스**이다.
 
-<br>
+<br> 
 
 ### 참고
 
