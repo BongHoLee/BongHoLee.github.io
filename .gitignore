@@ -1,6 +1,62 @@
-*.DS_Store
-*.gem
-.bundle
-.sass-cache
-_site
-Gemfile.lock
+HELP.md
+.gradle
+build/
+_build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### log ###
+logs/
+safe.logs.dir_IS_UNDEFINED/
+*.log
+*.zip
+
+### DB ###
+*.db
+
+### safe-web ###
+node_modules/
+package-lock.json
+web/src/main/resources/static/
+!web/frontend/build
+
+### Docker ###
+docker/db/*db
+docker/distTar/*
+docker/shell/*
+docker/**/*.tar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### OS ###
+.DS_Store
+
+### python ###
+dist/
+**/__pycache__/**
+*egg-info/

@@ -62,6 +62,7 @@
       <workItem from="1633939698027" duration="335000" />
       <workItem from="1644299363944" duration="1074000" />
       <workItem from="1644300982157" duration="3553000" />
+      <workItem from="1644304736491" duration="327000" />
     </task>
     <task id="LOCAL-00001" summary="identical">
       <created>1631420324896</created>
@@ -231,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644303904926</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="코틀린기본">
+      <created>1644304754600</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1644304754600</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
