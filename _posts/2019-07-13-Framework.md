@@ -2,7 +2,7 @@
 layout: post
 title: Framework/Library
 author: Bong5
-categories: [Keywords, Java, WEB/Basic]
+categories: [Keywords, ProgramingLanguage/Java, WEB/Basic]
 ---
 
 ## Framework/Library
