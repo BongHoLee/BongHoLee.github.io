@@ -17,6 +17,8 @@ categories: [Keywords, ProgramingLanguage/Java]
     - 만일 `key:value`가 `msg:hello`라면 `T[h(msg)] = hello`와 같이 저장되는 것.
     - **KEY의 해쉬값이 배열의 인덱스가 된다는 점을 기억하자.**
 
+<br>
+
 ### 충돌
 
 `해슁`에서 `충돌`은 피할 수 없는 문제이다. 데이터를 저장하는 해쉬 테이블의 크기가 한정되어 있기 때문에 **해쉬 함수의 결과(해쉬값)은 중복 될 수 있다.**
@@ -26,6 +28,7 @@ categories: [Keywords, ProgramingLanguage/Java]
 이에 따라 `T[12]`에는 충돌이 생겨버린다.
 
 `충돌`이 생길 수 밖에 없는 문제라면 `대처 방법`은 무엇일까. `체이닝`과 `오픈 어드레싱`이 존재한다.
+<br>
 
 ### Chaning
 
@@ -45,12 +48,14 @@ categories: [Keywords, ProgramingLanguage/Java]
 `체이닝`을 이용한 충돌 해결 방법에서 최악의 경우는 **모든 키가 하나의 슬롯으로 해슁되는 경우**이다.
 
 이 때 **길이가 `n`인 하나의 연결리스트**가 만들어 지고 이 때의 탐색 시간 복잡도는 `O(N)`이다.
+<br>
 
 ### Open Addressing
 
 `체이닝`이 각 슬롯에 `연결 리스트`를 사용해서 **충돌된 KEY들을 저장**하는 방식이라면 `Open Addressing`은 **해쉬테이블 자체에 저장**한다. 그렇다면 `충돌`은 어떻게 해결할까?
 
 기본적으로 해슁된 결과를 이용해 슬롯에 저장한 후, **충돌이 발생하면 그 다음 슬롯(+1) 순서로 검사하여 `처음으로 빈 슬롯에 저장`한다.**
+<br>
 
 ### 좋은 해쉬 함수
 
@@ -59,6 +64,7 @@ categories: [Keywords, ProgramingLanguage/Java]
 **해쉬 함수를 어떻게 구현하느냐에 따라 해슁의 성능이 결정된다**
 
 즉, `key`들이 `해쉬 테이블에 골고루 분포`되어 있는 정도가 성능에 영향을 미친다.
+<br>
 
 ### Hashing in java
 
@@ -67,7 +73,8 @@ Java의 Object 클래스는 `hashCode()` 메서드를 갖는다. 따라서 **모
 - 만일 `x.equals(y)`라면 `x.hashCode() == y.hashCode()`가 성립한다. 역은 성립하지 않는다.
 - Object 클래스의 `hashCode()` 메서드는 **객체의 메모리 주소를 반환**하는 것으로 알려져 있다.
 - 필요에 따라서 각 클래스마다 `hashCode()` 메서드를 오버라이딩 해서 사용한다.
-
+  <br>
+  
 ### HashMap in Java
 
 자바에서 `HashMap`은 `HashTable`, `hashCode()`, `load factor`, `chaining`으로 요약된다.
