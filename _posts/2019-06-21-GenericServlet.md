@@ -2,7 +2,7 @@
 layout: post
 title: GenericServlet
 author: Bong5
-categories: [Keywords, Java, WEB/Servlet]
+categories: [Keywords, ProgramingLanguage/Java, WEB/Servlet]
 ---
 
 ## GenericServlet

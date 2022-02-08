@@ -2,7 +2,7 @@
 layout: post
 title: 프로퍼티를 이용한 객체관리와 Reflaction
 author: Bong5
-categories: [Java, WEB/Servlet, WEB/Basic]
+categories: [ProgramingLanguage/Java, WEB/Servlet, WEB/Basic]
 ---
 
 ## 프로퍼티

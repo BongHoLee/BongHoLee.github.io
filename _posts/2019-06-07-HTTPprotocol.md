@@ -2,7 +2,7 @@
 layout: post
 title: Http Protocol
 author: Bong5
-categories: [Keywords, Java, WEB/Basic]
+categories: [Keywords, ProgramingLanguage/Java, WEB/Basic]
 ---
 
 ## Http Protocol
