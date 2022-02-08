@@ -1,5 +1,5 @@
 ---
 layout: category
-title: Java
-permalink: '/Java'
+title: ProgramingLanguage/Java
+permalink: '/Programing_Language/Java'
 ---
