@@ -58,11 +58,11 @@ categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 > 참고: 중요한 것은 코드 한줄한줄의 구현 내용이 아니라 **추상화된 상위 수준에서 어떤 흐름을 갖는지**를 이해하는 방향이다.
 >
 
+<br>
+
 **RequestMappingHandlerMapping의 타입 계층**
 
 <img src="/assets/img/spring/img1.GIF" width="70%" height="auto" >
-
-<br>
 
 타입 계층에서 확인할 수 있듯이 `RequestMappingHandlerMapping`은 **깊은 추상 클래스 상속**계층을 갖는다.
 
@@ -71,6 +71,8 @@ categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 또한 상위 타입 중 하나인 `AbstractHandlerMethodMapping`의 이름을 보면 알 수 있듯이 해당 타입은 **handler의 level이 `method level`이다.** 즉, **요청을 처리하는 `메서드`**가 `handler`가 된다.
 
 (`handler == controller`가 아니다!)
+
+<br>
 
 **초기화 메서드 initHandlerMethods**
 
@@ -86,11 +88,15 @@ categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 
 주의깊게 봐야할 오퍼레이션은 `isHandler`, `detectHandlerMethod`가 되겠다.
 
+<br>
+
 **isHandler**
 
 <script src="https://gist.github.com/BongHoLee/18acc11c834061f716e97a92fabaed41.js"></script>
 
 `RequestMappingHandlerMapping` 타입이 매핑 가능한 핸들러(핸들러로 등록 가능)는 `@Controller` 또는 `@RequestMapping` 어노테이션이 붙은 `bean`이다.
+
+<br>
 
 **detectHandlerMethods**
 
@@ -107,6 +113,8 @@ categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 구현에서 보면 알 수 있듯이 전달받은 `method`가 `@RequestMapping`이 정의되어있는지 여부를 확인 후 `null` 또는 `메타 정보(RequestMappingInfo)`를 전달한다.
 
 결국, `RequestMappingHandlerMapping` 타입에서 `hanlderMethod`로써 기능할 수 있는 메서드란 `@RequestMapping` 어노테이션이 붙은 메서드를 의미한다.
+
+<br>
 
 다시 **`detectHandlerMethods` 메서드를 살펴보자.**
 
