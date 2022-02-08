@@ -76,6 +76,6 @@ categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 
 <br> 
 
-### 참고
+### 참고 
 
 - [http://www.javabyexamples.com/cglib-proxying-in-spring-configuration](http://www.javabyexamples.com/cglib-proxying-in-spring-configuration)
