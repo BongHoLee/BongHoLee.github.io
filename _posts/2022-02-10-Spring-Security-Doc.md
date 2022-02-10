@@ -139,7 +139,7 @@ categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 - OAuth2AuthorizationCodeGrantFilter
 - SessionManagementFilter
 - `[ExceptionTranslationFilter](https://docs.spring.io/spring-security/reference/servlet/architecture.html#servlet-exceptiontranslationfilter)`
-- `[FilterSecurityInterceptor](https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-requests.html#servlet-authorization-filtersecurityinterceptor)`
+- `[FilterSecurityInterceptor](https://docs.spring.io/spring-security}/reference/servlet/authorization/authorize-requests.html#servlet-authorization-filtersecurityinterceptor)`
 - SwitchUserFilter
 
 <br>
