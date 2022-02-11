@@ -11,6 +11,8 @@ categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 
 ## Authentication(인증) 관련 Architecture
 
+- [스프링 공식 문서](https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html)
+
 ### Overview
 
 - **SecurityContextHolder** - 스프링 시큐리티가 `인증된 주체`를 저장하는 객체
