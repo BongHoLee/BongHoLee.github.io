@@ -7,6 +7,8 @@ categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 
 ## Spring Security 공식 문서 톺아보기(1)
 
+- [스프링 공식 문서](https://docs.spring.io/spring-security/reference/servlet/architecture.html)
+
 ---
 
 ### 스프링 부트 Auto Configuration
