@@ -12,6 +12,9 @@ categories: [Keywords, WEB/Spring_Framework, WEB/Spring_Boot]
 ## Authentication(인증) 관련 Architecture
 
 - [스프링 공식 문서](https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html)
+- [Spring Security - 공식 문서 톺아보기 1](https://bongholee.github.io/keywords/web/spring_framework/web/spring_boot/2022/02/10/Spring-Security-Doc.html)
+- [Spring Security - 공식 문서 톺아보기 2](https://bongholee.github.io/keywords/web/spring_framework/web/spring_boot/2022/02/10/Spring-Security-Doc2.html)
+- [Spring Security - Form 기반 인증](https://bongholee.github.io/keywords/web/spring_framework/web/spring_boot/2022/03/20/Spring-Security-Form.html)
 
 ### Overview
 
