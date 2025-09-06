@@ -1,0 +1,159 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+
+// 모든 블로그 포스트를 가져와서 카테고리별로 그룹화
+const posts = await getCollection('blog');
+
+// 카테고리별 포스트 수 계산
+const categoryCount = posts.reduce((acc, post) => {
+	if (post.data.categories && Array.isArray(post.data.categories)) {
+		post.data.categories.forEach(category => {
+			acc[category] = (acc[category] || 0) + 1;
+		});
+	}
+	return acc;
+}, {} as Record<string, number>);
+
+// 카테고리를 알파벳순으로 정렬
+const sortedCategories = Object.keys(categoryCount).sort();
+
+const categoryDescriptions: Record<string, string> = {
+	'Programming': '프로그래밍 언어, 개발 기술, 코딩 실습에 관한 포스트',
+	'Algorithm': '자료구조, 알고리즘 문제해결, 코딩테스트에 관한 포스트', 
+	'Book-Review': '기술서적 리뷰, 독서 노트, 학습 정리',
+	'System-Design': '시스템 아키텍처, 설계 패턴, 소프트웨어 구조',
+	'DevOps': '배포, 운영, 개발 도구, CI/CD에 관한 포스트'
+};
+---
+
+<!doctype html>
+<html lang="ko">
+	<head>
+		<BaseHead title="카테고리 | ${SITE_TITLE}" description="블로그 포스트를 카테고리별로 분류해서 탐색하세요." />
+	</head>
+	<body>
+		<Header title={SITE_TITLE} />
+		<main>
+			<section class="category-intro">
+				<h1>📂 카테고리</h1>
+				<p>관심 있는 주제의 포스트를 쉽게 찾아보세요.</p>
+			</section>
+			
+			<section class="categories-grid">
+				{sortedCategories.map((category) => (
+					<div class="category-card">
+						<h2>
+							<a href={`/categories/${category.toLowerCase()}/`}>
+								{category}
+							</a>
+						</h2>
+						<p class="category-description">
+							{categoryDescriptions[category] || `${category}에 관한 포스트`}
+						</p>
+						<div class="category-meta">
+							<span class="post-count">
+								{categoryCount[category]}개 포스트
+							</span>
+						</div>
+					</div>
+				))}
+			</section>
+		</main>
+		<Footer />
+		
+		<style>
+			.category-intro {
+				text-align: center;
+				margin-bottom: 3rem;
+			}
+			
+			.category-intro h1 {
+				font-size: 2.5rem;
+				margin-bottom: 1rem;
+				color: #2c3e50;
+			}
+			
+			.category-intro p {
+				font-size: 1.2rem;
+				color: #7f8c8d;
+				max-width: 600px;
+				margin: 0 auto;
+			}
+			
+			.categories-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				margin-bottom: 3rem;
+			}
+			
+			.category-card {
+				background: white;
+				border-radius: 12px;
+				padding: 2rem;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
+				border: 1px solid #e1e8ed;
+			}
+			
+			.category-card:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+			}
+			
+			.category-card h2 {
+				margin: 0 0 1rem 0;
+				font-size: 1.5rem;
+			}
+			
+			.category-card h2 a {
+				color: #2c3e50;
+				text-decoration: none;
+			}
+			
+			.category-card h2 a:hover {
+				color: #3498db;
+			}
+			
+			.category-description {
+				color: #7f8c8d;
+				margin-bottom: 1.5rem;
+				line-height: 1.6;
+			}
+			
+			.category-meta {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			
+			.post-count {
+				background: #ecf0f1;
+				color: #2c3e50;
+				padding: 0.5rem 1rem;
+				border-radius: 20px;
+				font-size: 0.9rem;
+				font-weight: 500;
+			}
+			
+			@media (max-width: 768px) {
+				.categories-grid {
+					grid-template-columns: 1fr;
+					gap: 1rem;
+				}
+				
+				.category-card {
+					padding: 1.5rem;
+				}
+				
+				.category-intro h1 {
+					font-size: 2rem;
+				}
+			}
+		</style>
+	</body>
+</html>
