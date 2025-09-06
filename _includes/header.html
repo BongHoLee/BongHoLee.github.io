@@ -1,0 +1,120 @@
+<header class="site-header">
+	<div class="branding">
+		{% if site.theme_settings.gravatar %}
+		<a href="{{ site.baseurl }}/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/{{ site.theme_settings.gravatar }}?s=100" alt=""/>
+		</a>
+		{% elsif site.theme_settings.avatar %}
+		<a href="{{ site.baseurl }}/">
+			<img class="avatar" src="{{ site.baseurl }}/{{ site.theme_settings.avatar }}" alt=""/>
+		</a>
+		{% endif %}
+		<h1 class="site-title">
+			<a href="{{ site.baseurl }}/">{{ site.theme_settings.title }}</a>
+		</h1>
+	<div class="site-category">
+		<ul class='cat1'>
+			<li><a href="/">Home</a></li>
+			<li><a href="/">Algorithms</a>
+				<ul>
+						<li><a href="/Algorithms/Theory">Theory</a></li>
+						<li><a href="/Algorithms/Programmers">Programmers</a></li>
+				</ul>
+			</li>
+
+			<li><a href="/">Programming_Language</a>
+				<ul>
+					<li><a href="/Programing_Language/Java">Java</a></li>
+					<li><a href="/Programing_Language/Kotlin">Kotlin</a></li>
+				</ul>
+			</li>
+
+			<li><a href="/">IT Keywords</a> 
+				<ul>
+						<li><a href="/Keywords">IT Keywords</a></li>
+				</ul>
+			</li>
+
+			<li><a href="/">WEB Programming</a>
+				<ul>
+					<li><a href="/WEB/Basic">Basic</a></li>
+					<li><a href="/WEB/Servlet">Servlet</a></li>
+					<li><a href="/WEB/Spring_Framework">Spring Framework</a></li>
+					<li><a href="/WEB/Spring_Boot">Spring Boot</a></li>
+				</ul>
+			</li>
+
+			<li><a href="/">Insight</a>
+				<ul>
+					<li><a href="/Insight">Insight</a></li>
+				</ul>
+			</li>
+
+			<li><a href="/">DataBase</a>
+				<ul>
+					<li><a href="/DataBase">데이터베이스</a></li>
+				</ul>
+			</li>
+
+			<li><a href="/">Books</a>
+				<ul>
+					<li><a href="/Books/Object">오브젝트</a></li>
+					<li><a href="/Books/CleanCode">Clean Code</a></li>
+				</ul>
+			</li>
+
+
+			<li><a href="/">Others</a>
+				<ul>
+					<li><a href="/Others/Design">설계</a></li>
+					<li><a href="/Others/PoC">테스트|검증</a></li>
+					<li><a href="/Others/OpenSource">오픈소스</a></li>
+					<li><a href="/Others/TroubleShooting">트러블슈팅</a></li>
+				</ul>
+			</li>
+
+
+		</ul>
+		</div>
+
+
+	</div>
+
+	<nav class="site-nav">
+		<ul>
+			{% if site.theme_settings.site_navigation_sort %}
+				{% assign site_pages = site.pages | sort: site.theme_settings.site_navigation_sort %}
+			{% else %}
+				{% assign site_pages = site.pages %}
+			{% endif %}
+			{% for page in site_pages %}
+			{% if page.title and page.hide != true %}
+
+			<!--
+			<li>
+				<a class="page-link" href="{{ page.url | relative_url }}">
+					{{ page.title }}
+				</a>
+			</li>
+			-->
+
+			{% endif %}
+			{% endfor %}
+			<!-- Social icons from Font Awesome, if enabled  -->
+			{% include icons.html %}
+
+            <!-- Search bar -->
+            {% if site.theme_settings.search %}
+            <li>
+            <form action="{{ site.baseurl }}/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            {% endif %}
+		</ul>
+	</nav>
+
+</header>
