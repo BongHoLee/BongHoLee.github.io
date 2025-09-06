@@ -3,7 +3,7 @@ title: "Programmers_숫자야구"
 description: "처음 문제를 보고서 약 2시간 가량 접근법이 떠오르지 않아 한참을 고민하다가 결국 다른 분들의 블로그를 보고 접근법을 참고하여 해결하였다."
 pubDate: 2020-01-12
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

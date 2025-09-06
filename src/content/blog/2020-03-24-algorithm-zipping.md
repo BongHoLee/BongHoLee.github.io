@@ -3,7 +3,7 @@ title: "Programmers(KAKAO) 2020_문자열_압축"
 description: "문제를 제대로 이해했다면 어렵지 않은 문제이다."
 pubDate: 2020-03-24
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

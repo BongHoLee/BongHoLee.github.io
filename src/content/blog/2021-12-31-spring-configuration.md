@@ -3,7 +3,7 @@ title: "Spring @Configuration에 관하여 (feat. CGLIB Proxy)"
 description: "`스프링 컨테이너`에 `Bean`을 등록하는 방법은 다양하다."
 pubDate: 2021-12-31
 author: "Bong5"
-categories: ["Programming"]
+categories: ["DevOps"]
 tags: ["Keywords", "Spring_Framework", "Spring_Boot"]
 ---
 

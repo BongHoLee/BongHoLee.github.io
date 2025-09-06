@@ -3,7 +3,7 @@ title: "Logstash to Logstash (TCP) 트러블슈팅"
 description: "이 포스트에 대한 설명"
 pubDate: 2021-03-02
 author: "Bong5"
-categories: ["Programming"]
+categories: ["DevOps"]
 tags: ["PoC"]
 ---
 

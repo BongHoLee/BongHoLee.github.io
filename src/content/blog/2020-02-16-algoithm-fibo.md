@@ -3,7 +3,7 @@ title: "Programmers(재귀/DP)_피보나치"
 description: "`피보나치`는 `분기`가 필요한 재귀 알고리즘 중 가장 대표적인 문제이다."
 pubDate: 2020-02-16
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

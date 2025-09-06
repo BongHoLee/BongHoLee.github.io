@@ -3,7 +3,7 @@ title: "What is Gradle?"
 description: "이 포스트에 대한 설명"
 pubDate: 2022-02-03
 author: "Bong5"
-categories: ["Programming"]
+categories: ["DevOps"]
 tags: ["Keywords", "Spring_Framework", "Spring_Boot"]
 ---
 

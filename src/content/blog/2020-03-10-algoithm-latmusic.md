@@ -3,7 +3,7 @@ title: "Programmers(KAKAO) 방금 그곡"
 description: "---"
 pubDate: 2020-03-10
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

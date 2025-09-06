@@ -3,7 +3,7 @@ title: "Programmer 가장 큰 수"
 description: "일전에 풀었던 문제를 복기할 겸 다시 풀었다."
 pubDate: 2020-04-11
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

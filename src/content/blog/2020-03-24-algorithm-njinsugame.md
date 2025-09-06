@@ -3,7 +3,7 @@ title: "Programmers(KAKAO) 2018_N진수_게임"
 description: "`진법 구하기` 공식을 알고 있다면 쉽게 풀 수 있는 평이한 문제이다."
 pubDate: 2020-03-24
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

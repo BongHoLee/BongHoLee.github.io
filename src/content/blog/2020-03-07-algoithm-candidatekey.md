@@ -3,7 +3,7 @@ title: "Programmers(KAKAO) 후보키"
 description: "데이터베이스 후보키 목록들을 알고리즘으로 선별하는 문제이다."
 pubDate: 2020-03-07
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

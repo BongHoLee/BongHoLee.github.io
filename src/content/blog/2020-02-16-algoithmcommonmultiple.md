@@ -3,7 +3,7 @@ title: "Programmers(수학)_N개의_최소공배수"
 description: "`수학` 알고리즘에서 자주 출제되는 `최소 공배수` 구하기 문제이다. 다만 이 문제는 배열 내의 모든 수의 최소공배수를 구하는 문제로써, 어떻게 보면 최소공배수 알고리즘 공식을 배열 요소들 모두에 적용해야 한다고 생각할 수 있다."
 pubDate: 2020-02-16
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

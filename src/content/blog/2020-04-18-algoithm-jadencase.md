@@ -3,7 +3,7 @@ title: "Programmers_JadenCase 문자열 만들기"
 description: "문제 지문 자체가 애매하고 지문과 테스트케이스 사이에 모순이 존재하기 때문에 고생시키는 문제이다."
 pubDate: 2020-04-18
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

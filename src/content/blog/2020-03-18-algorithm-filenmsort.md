@@ -3,7 +3,7 @@ title: "Programmers(KAKAO) 2018_파일명_정렬"
 description: "문제를 잘 읽고 그대로 코드로 옮기기만 하면 되는, 즉 `구현`만 잘 하면 되는 간단한 문제이다."
 pubDate: 2020-03-18
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

@@ -3,7 +3,7 @@ title: "Programmer(Greedy) 구명보트"
 description: "부분해의 최적해가 전체의 최적해가 되는 Greedy 알고리즘이다."
 pubDate: 2020-05-13
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

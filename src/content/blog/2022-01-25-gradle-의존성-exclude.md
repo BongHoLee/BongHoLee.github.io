@@ -3,7 +3,7 @@ title: "TroubleShooting - gradle 의존성 exclude(spring-starter-logging)"
 description: "이 포스트에 대한 설명"
 pubDate: 2022-01-25
 author: "Bong5"
-categories: ["Programming"]
+categories: ["DevOps"]
 tags: ["TroubleShooting"]
 ---
 

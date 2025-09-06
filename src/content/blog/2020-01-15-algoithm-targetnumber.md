@@ -3,7 +3,7 @@ title: "Programmers(DFS)_타겟넘버"
 description: "문제 해결의 실마리는 상당히 간단하다. 위 문제는 _+_ 또는 _-_ 로 __분기__ 되기 때문에 단순한 __for 루프__ 로는 해결하기 쉽지 않다."
 pubDate: 2020-01-15
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

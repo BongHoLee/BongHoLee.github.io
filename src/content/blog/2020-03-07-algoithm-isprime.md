@@ -3,7 +3,7 @@ title: "Programmers(Math) 소수 만들기"
 description: "전형적인 `조합(Combination)` 문제이다. 조금 다른 것이 있다면 `소수 판별` 로직이 추가된다는 점이다."
 pubDate: 2020-03-07
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

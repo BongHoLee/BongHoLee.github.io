@@ -3,7 +3,7 @@ title: "Programmers(KAKAO) 뉴스 클러스터링"
 description: "문제는 길지만 어렵지 않은 문제이다. 문제 속에 힌트가 존재하기 때문에 그대로 구현만 하면 쉽게 풀 수 있다."
 pubDate: 2020-03-07
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 

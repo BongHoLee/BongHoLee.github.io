@@ -3,7 +3,7 @@ title: "Programmers(KAKAO) 프렌즈 4블록"
 description: "2차원 배열 형태의 4블록 문제이다."
 pubDate: 2020-03-08
 author: "Bong5"
-categories: ["Programming"]
+categories: ["Algorithm"]
 tags: ["Programmers"]
 ---
 
