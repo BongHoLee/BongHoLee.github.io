@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
@@ -13,102 +12,226 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
+		<BaseHead title={`Blog | ${SITE_TITLE}`} description="모든 블로그 포스트를 최신순으로 확인하세요." />
 	</head>
 	<body>
-		<Header />
+		<Header title={SITE_TITLE} />
 		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
+			<section class="blog-header">
+				<h1>📝 Blog</h1>
+				<p>모든 포스트를 최신순으로 확인해보세요.</p>
+				<div class="blog-stats">
+					<span class="post-count">{posts.length}개의 포스트</span>
+					<a href="/categories/" class="categories-link">카테고리별 보기 →</a>
+				</div>
+			</section>
+			
+			<section class="posts-list">
+				{posts.map((post) => (
+					<article class="post-card">
+						<div class="post-content">
+							<h2 class="post-title">
+								<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+							</h2>
+							
+							<div class="post-meta">
+								<FormattedDate date={post.data.pubDate} />
+								{post.data.author && <span class="author">by {post.data.author}</span>}
+							</div>
+							
+							{post.data.description && (
+								<p class="post-description">{post.data.description}</p>
+							)}
+							
+							<div class="post-tags-categories">
+								{post.data.categories && post.data.categories.length > 0 && (
+									<div class="post-categories">
+										{post.data.categories.slice(0, 2).map((category) => (
+											<a href={`/categories/${category.toLowerCase()}/`} class="category">{category}</a>
+										))}
+									</div>
+								)}
+								
+								{post.data.tags && post.data.tags.length > 0 && (
+									<div class="post-tags">
+										{post.data.tags.slice(0, 3).map((tag) => (
+											<span class="tag">{tag}</span>
+										))}
+									</div>
+								)}
+							</div>
+						</div>
+					</article>
+				))}
 			</section>
 		</main>
 		<Footer />
+		
+		<style>
+			.blog-header {
+				text-align: center;
+				margin-bottom: 3rem;
+				padding: 2rem 0;
+			}
+			
+			.blog-header h1 {
+				font-size: 2.5rem;
+				margin-bottom: 1rem;
+				color: #2c3e50;
+			}
+			
+			.blog-header p {
+				font-size: 1.2rem;
+				color: #7f8c8d;
+				margin-bottom: 1.5rem;
+				max-width: 600px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			.blog-stats {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 2rem;
+				flex-wrap: wrap;
+			}
+			
+			.post-count {
+				background: #ecf0f1;
+				color: #2c3e50;
+				padding: 0.5rem 1rem;
+				border-radius: 20px;
+				font-weight: 500;
+			}
+			
+			.categories-link {
+				color: #3498db;
+				text-decoration: none;
+				font-weight: 500;
+			}
+			
+			.categories-link:hover {
+				text-decoration: underline;
+			}
+			
+			.posts-list {
+				display: flex;
+				flex-direction: column;
+				gap: 1.5rem;
+			}
+			
+			.post-card {
+				background: white;
+				border-radius: 12px;
+				padding: 2rem;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				border: 1px solid #e1e8ed;
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+			}
+			
+			.post-card:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+			}
+			
+			.post-title {
+				margin: 0 0 1rem 0;
+				font-size: 1.5rem;
+				line-height: 1.4;
+			}
+			
+			.post-title a {
+				color: #2c3e50;
+				text-decoration: none;
+			}
+			
+			.post-title a:hover {
+				color: #3498db;
+			}
+			
+			.post-meta {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				margin-bottom: 1rem;
+				color: #7f8c8d;
+				font-size: 0.9rem;
+			}
+			
+			.post-description {
+				color: #555;
+				line-height: 1.6;
+				margin-bottom: 1rem;
+			}
+			
+			.post-tags-categories {
+				display: flex;
+				gap: 1rem;
+				align-items: center;
+				flex-wrap: wrap;
+			}
+			
+			.post-categories {
+				display: flex;
+				gap: 0.5rem;
+			}
+			
+			.category {
+				background: #3498db;
+				color: white;
+				padding: 0.25rem 0.75rem;
+				border-radius: 15px;
+				font-size: 0.8rem;
+				text-decoration: none;
+				font-weight: 500;
+			}
+			
+			.category:hover {
+				background: #2980b9;
+			}
+			
+			.post-tags {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+			}
+			
+			.tag {
+				background: #f8f9fa;
+				color: #495057;
+				padding: 0.25rem 0.75rem;
+				border-radius: 15px;
+				font-size: 0.8rem;
+				border: 1px solid #e9ecef;
+			}
+			
+			@media (max-width: 768px) {
+				.blog-header h1 {
+					font-size: 2rem;
+				}
+				
+				.blog-stats {
+					flex-direction: column;
+					gap: 1rem;
+				}
+				
+				.post-card {
+					padding: 1.5rem;
+				}
+				
+				.post-title {
+					font-size: 1.3rem;
+				}
+				
+				.post-tags-categories {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 0.5rem;
+				}
+			}
+		</style>
 	</body>
 </html>
