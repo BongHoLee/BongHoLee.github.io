@@ -200,35 +200,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 			}
 			
-			.prose :global(blockquote::before) {
-				content: '"';
-				font-size: 1.5rem;
-				color: #3b82f6;
-				position: absolute;
-				top: 0.75rem;
-				left: 0.75rem;
-				font-weight: 700;
-				opacity: 0.8;
-				font-family: Georgia, serif;
-			}
-			
-			.prose :global(blockquote::after) {
-				content: '"';
-				font-size: 1.5rem;
-				color: #3b82f6;
-				position: absolute;
-				bottom: 0.25rem;
-				right: 0.75rem;
-				font-weight: 700;
-				opacity: 0.8;
-				font-family: Georgia, serif;
-			}
 			
 			.prose :global(blockquote p) {
 				margin: 0.5rem 0;
-				position: relative;
-				z-index: 1;
-				padding: 0 0.5rem;
 			}
 			
 			/* 코드 스타일 */
