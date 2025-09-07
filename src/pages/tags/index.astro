@@ -1,0 +1,191 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+
+// 모든 포스트에서 태그 수집
+const posts = await getCollection('blog');
+const allTags = new Map<string, number>();
+
+posts.forEach(post => {
+	if (post.data.tags) {
+		post.data.tags.forEach((tag: string) => {
+			const count = allTags.get(tag) || 0;
+			allTags.set(tag, count + 1);
+		});
+	}
+});
+
+// 태그를 알파벳 순으로 정렬
+const sortedTags = Array.from(allTags.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+
+const tagEmojis: Record<string, string> = {
+	'Java': '☕',
+	'Keywords': '🔑',
+	'Framework': '🏗️',
+	'Database': '🗄️',
+	'Algorithm': '🧮',
+	'Spring': '🍃',
+	'Kotlin': '🎯',
+	'Security': '🔒',
+	'Architecture': '🏛️',
+	'Design Pattern': '🎨',
+	'Reflection': '🪞',
+	'Testing': '🧪',
+	'Performance': '⚡',
+	'Memory': '💾',
+	'Network': '🌐',
+	'Web': '🌐',
+	'Backend': '⚙️',
+	'Frontend': '🎨',
+	'DevOps': '🚀',
+	'Git': '📝'
+};
+---
+
+<!doctype html>
+<html lang="ko">
+	<head>
+		<BaseHead title={`Tags | ${SITE_TITLE}`} description="모든 태그를 확인하고 태그별 포스트를 탐색하세요." />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="tags-header">
+				<h1>🏷️ Tags</h1>
+				<p>태그별로 포스트를 탐색해보세요.</p>
+				<div class="tags-stats">
+					<span class="tag-count">{sortedTags.length}개의 태그</span>
+					<span class="total-posts">{posts.length}개의 포스트</span>
+				</div>
+			</section>
+			
+			<section class="tags-grid">
+				{sortedTags.map(([tag, count]) => (
+					<a href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}/`} class="tag-card">
+						<div class="tag-info">
+							<div class="tag-header">
+								<span class="tag-emoji">{tagEmojis[tag] || '🏷️'}</span>
+								<h3 class="tag-name">{tag}</h3>
+							</div>
+							<p class="tag-count-text">{count}개의 포스트</p>
+						</div>
+					</a>
+				))}
+			</section>
+		</main>
+		<Footer />
+		
+		<style>
+			.tags-header {
+				text-align: center;
+				margin-bottom: 3rem;
+				padding: 2rem 0;
+			}
+			
+			.tags-header h1 {
+				font-size: 2.5rem;
+				margin-bottom: 1rem;
+				color: #2c3e50;
+			}
+			
+			.tags-header p {
+				font-size: 1.2rem;
+				color: #7f8c8d;
+				margin-bottom: 1.5rem;
+				max-width: 600px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			.tags-stats {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 2rem;
+				flex-wrap: wrap;
+			}
+			
+			.tag-count, .total-posts {
+				background: #ecf0f1;
+				color: #2c3e50;
+				padding: 0.5rem 1rem;
+				border-radius: 20px;
+				font-weight: 500;
+			}
+			
+			.tags-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+				gap: 1.5rem;
+				padding: 0 1rem;
+			}
+			
+			.tag-card {
+				background: white;
+				border-radius: 12px;
+				padding: 1.5rem;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				border: 1px solid #e1e8ed;
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+				text-decoration: none;
+				color: inherit;
+			}
+			
+			.tag-card:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+			}
+			
+			.tag-info {
+				text-align: center;
+			}
+			
+			.tag-header {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.75rem;
+				margin-bottom: 0.5rem;
+			}
+			
+			.tag-emoji {
+				font-size: 2rem;
+			}
+			
+			.tag-name {
+				font-size: 1.25rem;
+				font-weight: 600;
+				color: #2c3e50;
+				margin: 0;
+			}
+			
+			.tag-count-text {
+				color: #7f8c8d;
+				font-size: 0.9rem;
+				margin: 0;
+			}
+			
+			@media (max-width: 768px) {
+				.tags-header h1 {
+					font-size: 2rem;
+				}
+				
+				.tags-stats {
+					flex-direction: column;
+					gap: 1rem;
+				}
+				
+				.tags-grid {
+					grid-template-columns: 1fr;
+				}
+				
+				.tag-card {
+					padding: 1.25rem;
+				}
+			}
+		</style>
+	</body>
+</html>

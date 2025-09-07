@@ -1,36 +1,97 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import type { GetStaticPaths } from 'astro';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+export const getStaticPaths = (async () => {
+	const posts = await getCollection('blog');
+	const allTags = new Set<string>();
+
+	// 모든 태그 수집
+	posts.forEach(post => {
+		if (post.data.tags) {
+			post.data.tags.forEach((tag: string) => {
+				allTags.add(tag.toLowerCase().replace(/\s+/g, '-'));
+			});
+		}
+	});
+
+	return Array.from(allTags).map(tag => ({
+		params: { tag },
+	}));
+}) satisfies GetStaticPaths;
+
+const { tag } = Astro.params;
+
+// 포스트 필터링 및 정렬
+const posts = await getCollection('blog');
+const filteredPosts = posts.filter(post => {
+	if (!post.data.tags) return false;
+	return post.data.tags.some((postTag: string) => 
+		postTag.toLowerCase().replace(/\s+/g, '-') === tag
+	);
+}).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// 원본 태그 이름 찾기
+const originalTagName = posts
+	.flatMap(post => post.data.tags || [])
+	.find((postTag: string) => postTag.toLowerCase().replace(/\s+/g, '-') === tag) || tag;
+
+const tagEmojis: Record<string, string> = {
+	'Java': '☕',
+	'Keywords': '🔑',
+	'Framework': '🏗️',
+	'Database': '🗄️',
+	'Algorithm': '🧮',
+	'Spring': '🍃',
+	'Kotlin': '🎯',
+	'Security': '🔒',
+	'Architecture': '🏛️',
+	'Design Pattern': '🎨',
+	'Reflection': '🪞',
+	'Testing': '🧪',
+	'Performance': '⚡',
+	'Memory': '💾',
+	'Network': '🌐',
+	'Web': '🌐',
+	'Backend': '⚙️',
+	'Frontend': '🎨',
+	'DevOps': '🚀',
+	'Git': '📝'
+};
+
+const tagEmoji = tagEmojis[originalTagName] || '🏷️';
 ---
 
 <!doctype html>
 <html lang="ko">
 	<head>
-		<BaseHead title={`Home | ${SITE_TITLE}`} description="모든 블로그 포스트를 최신순으로 확인하세요." />
+		<BaseHead 
+			title={`${originalTagName} | ${SITE_TITLE}`} 
+			description={`${originalTagName} 태그가 포함된 모든 포스트를 확인하세요.`} 
+		/>
 	</head>
 	<body>
-		<Header title={SITE_TITLE} />
+		<Header />
 		<main>
-			<section class="blog-header">
-				<h1>🏠 Home</h1>
-				<p>모든 포스트를 최신순으로 확인해보세요.</p>
-				<div class="blog-stats">
-					<span class="post-count">{posts.length}개의 포스트</span>
-					<a href="/categories/" class="categories-link">카테고리별 보기 →</a>
-					<a href="/tags/" class="tags-link">태그별 보기 →</a>
+			<section class="tag-header">
+				<div class="tag-title">
+					<span class="tag-emoji">{tagEmoji}</span>
+					<h1>{originalTagName}</h1>
+				</div>
+				<p>{originalTagName} 태그가 포함된 포스트들입니다.</p>
+				<div class="tag-stats">
+					<span class="post-count">{filteredPosts.length}개의 포스트</span>
+					<a href="/tags/" class="back-to-tags">모든 태그 보기 →</a>
 				</div>
 			</section>
 			
 			<section class="posts-list">
-				{posts.map((post) => (
+				{filteredPosts.map((post) => (
 					<article class="post-card">
 						<div class="post-content">
 							<h2 class="post-title">
@@ -57,8 +118,8 @@ const posts = (await getCollection('blog')).sort(
 								
 								{post.data.tags && post.data.tags.length > 0 && (
 									<div class="post-tags">
-										{post.data.tags.slice(0, 3).map((tag) => (
-											<a href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}/`} class="tag">{tag}</a>
+										{post.data.tags.slice(0, 3).map((postTag) => (
+											<a href={`/tags/${postTag.toLowerCase().replace(/\s+/g, '-')}/`} class="tag" class:list={{ active: postTag.toLowerCase().replace(/\s+/g, '-') === tag }}>{postTag}</a>
 										))}
 									</div>
 								)}
@@ -71,19 +132,31 @@ const posts = (await getCollection('blog')).sort(
 		<Footer />
 		
 		<style>
-			.blog-header {
+			.tag-header {
 				text-align: center;
 				margin-bottom: 3rem;
 				padding: 2rem 0;
 			}
 			
-			.blog-header h1 {
-				font-size: 2.5rem;
+			.tag-title {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 1rem;
 				margin-bottom: 1rem;
-				color: #2c3e50;
 			}
 			
-			.blog-header p {
+			.tag-emoji {
+				font-size: 3rem;
+			}
+			
+			.tag-header h1 {
+				font-size: 2.5rem;
+				color: #2c3e50;
+				margin: 0;
+			}
+			
+			.tag-header p {
 				font-size: 1.2rem;
 				color: #7f8c8d;
 				margin-bottom: 1.5rem;
@@ -92,7 +165,7 @@ const posts = (await getCollection('blog')).sort(
 				margin-right: auto;
 			}
 			
-			.blog-stats {
+			.tag-stats {
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -108,13 +181,13 @@ const posts = (await getCollection('blog')).sort(
 				font-weight: 500;
 			}
 			
-			.categories-link, .tags-link {
+			.back-to-tags {
 				color: #3498db;
 				text-decoration: none;
 				font-weight: 500;
 			}
 			
-			.categories-link:hover, .tags-link:hover {
+			.back-to-tags:hover {
 				text-decoration: underline;
 			}
 			
@@ -213,15 +286,29 @@ const posts = (await getCollection('blog')).sort(
 			
 			.tag:hover {
 				background: #e9ecef;
-				color: #495057;
+			}
+			
+			.tag.active {
+				background: #e74c3c;
+				color: white;
+				border-color: #e74c3c;
 			}
 			
 			@media (max-width: 768px) {
-				.blog-header h1 {
+				.tag-title {
+					flex-direction: column;
+					gap: 0.5rem;
+				}
+				
+				.tag-emoji {
+					font-size: 2.5rem;
+				}
+				
+				.tag-header h1 {
 					font-size: 2rem;
 				}
 				
-				.blog-stats {
+				.tag-stats {
 					flex-direction: column;
 					gap: 1rem;
 				}
