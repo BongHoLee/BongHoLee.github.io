@@ -1,6 +1,6 @@
 ---
 title: "클래스 로딩 과정"
-description: "이 포스트에 대한 설명"
+description: "자바 클래스 로딩 과정에 대해 알아보자."
 pubDate: 2022-02-01
 author: "Bong5"
 tags: ["Java"]

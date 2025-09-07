@@ -1,6 +1,6 @@
 ---
 title: "공유 라이브러리(DDL)"
-description: "이 포스트에 대한 설명"
+description: "Shared Library(DDL) 공유 라이브러리(shared library) 그 동안 IDE가 자동으로 해결해주었던 컴파일 및 빌드 등에 대해서 간단하게나마 개념을 학습하고 있는 중이다."
 pubDate: 2019-06-02
 author: "Bong5"
 tags: ["Java"]

@@ -1,6 +1,6 @@
 ---
 title: "Programmers(KAKAO) 방금 그곡"
-description: "---"
+description: "라디오를 자주 듣는 네오는 라디오에서 방금 나왔던 음악이 무슨 음악인지 궁금해질 때가 많다. 그럴 때 네오는 다음 포털의 '방금 그곡' 서비스를 이용하곤 한다."
 pubDate: 2020-03-10
 author: "Bong5"
 tags: ["Algorithm", "Programmers"]

@@ -1,6 +1,6 @@
 ---
 title: "Spring Security - Ajax 기반 인증"
-description: "이 포스트에 대한 설명"
+description: "Spring Security 비동기 기반 인증 방식에 대해 알아보자."
 pubDate: 2022-03-20
 author: "Bong5"
 tags: ["Spring", "Spring Boot", "Spring Security"]

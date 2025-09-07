@@ -1,9 +1,9 @@
 ---
 title: "TroubleShooting - gradle 의존성 exclude(spring-starter-logging)"
-description: "이 포스트에 대한 설명"
+description: "gradle 의존성 문제의 트러블 슈팅 과정"
 pubDate: 2022-01-25
 author: "Bong5"
-tags: ["DevOps", "Gradle", "OOP", "Spring", "Troubleshooting"]
+tags: ["Gradle","Spring", "Troubleshooting"]
 ---
 ### 이슈 내용
 

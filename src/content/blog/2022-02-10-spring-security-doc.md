@@ -1,6 +1,6 @@
 ---
 title: "Spring Security 공식 문서 톺아보기(1)"
-description: "이 포스트에 대한 설명"
+description: "Spring Security 공식 문서 톺아보기"
 pubDate: 2022-02-10
 author: "Bong5"
 tags: ["Spring", "Spring Boot", "Spring Security"]

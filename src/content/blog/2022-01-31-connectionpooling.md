@@ -1,6 +1,6 @@
 ---
 title: "JDBC Connection Pooling"
-description: "이 포스트에 대한 설명"
+description: "JDBC, DBCP, DataSource에 대해 알아보자."
 pubDate: 2022-01-31
 author: "Bong5"
 tags: ["Java"]

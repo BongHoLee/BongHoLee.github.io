@@ -1,6 +1,6 @@
 ---
 title: "DB냐 Application이냐?"
-description: "이 포스트에 대한 설명"
+description: "이 처리말인데... DB에서 해야할까? 어플리케이션에서 해야할까?"
 pubDate: 2022-02-04
 author: "Bong5"
 tags: ["Insight"]

@@ -1,6 +1,6 @@
 ---
 title: "Kotlin - MyBatis"
-description: "이 포스트에 대한 설명"
+description: "마이바티스 구성 요소에 대해 알아보자."
 pubDate: 2022-02-02
 author: "Bong5"
 tags: ["Kotlin"]

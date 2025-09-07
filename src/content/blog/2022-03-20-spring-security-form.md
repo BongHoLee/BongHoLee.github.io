@@ -1,6 +1,6 @@
 ---
 title: "Spring Security - Form 기반 인증"
-description: "<br>"
+description: "Spring Security Form 기반 인증에 대해 알아보자"
 pubDate: 2022-03-20
 author: "Bong5"
 tags: ["Spring", "Spring Boot", "Spring Security"]

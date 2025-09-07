@@ -1,6 +1,6 @@
 ---
 title: "Compile & Build"
-description: "이 포스트에 대한 설명"
+description: "Compile & Build 컴파일 및 빌드 팀의 업무 프로세스를 최대한 빠르게 학습하기 위해서 우선적으로 솔루션 개발의 전반적인 툴(Git, Framework, Jenkins 등)을 먼저 공부해야할 필요성을 느꼈다."
 pubDate: 2019-06-02
 author: "Bong5"
 tags: ["Java"]

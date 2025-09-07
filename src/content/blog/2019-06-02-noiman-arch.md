@@ -1,6 +1,6 @@
 ---
 title: "폰 노이만 아키텍쳐"
-description: "이 포스트에 대한 설명"
+description: "폰 노이만 아키텍처 4개의 기본 하드웨어 구성요소 입력장치 출력장치 주기억장치(Main Memory) : 프로그램과 데이터를 모두 저장 중앙 처리 장치(CPU) : Control Unit + ALU 머신코드(Machine Code) 컴퓨터가 실제로 읽고, 해석하고, 실행하는 프로그램 C"
 pubDate: 2019-06-02
 author: "Bong5"
 tags: ["Java"]

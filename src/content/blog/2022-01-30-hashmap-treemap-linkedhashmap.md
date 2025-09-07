@@ -1,6 +1,6 @@
 ---
 title: "HashMap, TreeMap, LinkedHashMap"
-description: "이 포스트에 대한 설명"
+description: "HashMap, TreeMap, LinkedHashMap에 대해 알아보자"
 pubDate: 2022-01-30
 author: "Bong5"
 tags: ["Hashing", "Java", "Tree"]

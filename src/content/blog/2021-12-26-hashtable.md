@@ -1,6 +1,6 @@
 ---
 title: "해쉬테이블(with JAVA HashMap)"
-description: "이 포스트에 대한 설명"
+description: "해쉬테이블은 일반적으로 배열이다. h(key)의 결과를 index로 갖는다."
 pubDate: 2021-12-26
 author: "Bong5"
 tags: ["Hashing", "Java"]

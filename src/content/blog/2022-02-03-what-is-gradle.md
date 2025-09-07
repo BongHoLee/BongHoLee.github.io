@@ -1,9 +1,9 @@
 ---
 title: "What is Gradle?"
-description: "이 포스트에 대한 설명"
+description: "Gradle이 몰까?"
 pubDate: 2022-02-03
 author: "Bong5"
-tags: ["DevOps", "Gradle", "Spring", "Spring Boot"]
+tags: ["Gradle"]
 ---
 ## 개요
 

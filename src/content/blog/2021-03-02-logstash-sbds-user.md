@@ -1,6 +1,6 @@
 ---
 title: "Logstash to Logstash (TCP) 트러블슈팅"
-description: "이 포스트에 대한 설명"
+description: "Logstash에 대한 테스트를 진행하였다. 진행 중 발생했던 이슈와 해결 방법을 위주로 기록한다. SBDS ~ USER 설계 전체적인 구조는 위 그림과 같다."
 pubDate: 2021-03-02
 author: "Bong5"
 tags: ["DevOps", "Logstash", "PoC"]
