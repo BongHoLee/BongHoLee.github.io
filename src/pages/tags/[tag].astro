@@ -107,23 +107,13 @@ const tagEmoji = tagEmojis[originalTagName] || '🏷️';
 								<p class="post-description">{post.data.description}</p>
 							)}
 							
-							<div class="post-tags-categories">
-								{post.data.categories && post.data.categories.length > 0 && (
-									<div class="post-categories">
-										{post.data.categories.slice(0, 2).map((category) => (
-											<a href={`/categories/${category.toLowerCase()}/`} class="category">{category}</a>
-										))}
-									</div>
-								)}
-								
-								{post.data.tags && post.data.tags.length > 0 && (
-									<div class="post-tags">
-										{post.data.tags.slice(0, 3).map((postTag) => (
-											<a href={`/tags/${postTag.toLowerCase().replace(/\s+/g, '-')}/`} class="tag" class:list={{ active: postTag.toLowerCase().replace(/\s+/g, '-') === tag }}>{postTag}</a>
-										))}
-									</div>
-								)}
-							</div>
+							{post.data.tags && post.data.tags.length > 0 && (
+								<div class="post-tags">
+									{post.data.tags.slice(0, 4).map((postTag) => (
+										<a href={`/tags/${postTag.toLowerCase().replace(/\s+/g, '-')}/`} class="tag" class:list={{ active: postTag.toLowerCase().replace(/\s+/g, '-') === tag }}>{postTag}</a>
+									))}
+								</div>
+							)}
 						</div>
 					</article>
 				))}
@@ -241,36 +231,11 @@ const tagEmoji = tagEmojis[originalTagName] || '🏷️';
 				margin-bottom: 1rem;
 			}
 			
-			.post-tags-categories {
-				display: flex;
-				gap: 1rem;
-				align-items: center;
-				flex-wrap: wrap;
-			}
-			
-			.post-categories {
-				display: flex;
-				gap: 0.5rem;
-			}
-			
-			.category {
-				background: #3498db;
-				color: white;
-				padding: 0.25rem 0.75rem;
-				border-radius: 15px;
-				font-size: 0.8rem;
-				text-decoration: none;
-				font-weight: 500;
-			}
-			
-			.category:hover {
-				background: #2980b9;
-			}
-			
 			.post-tags {
 				display: flex;
 				gap: 0.5rem;
 				flex-wrap: wrap;
+				margin-top: 1rem;
 			}
 			
 			.tag {
@@ -321,11 +286,6 @@ const tagEmoji = tagEmojis[originalTagName] || '🏷️';
 					font-size: 1.3rem;
 				}
 				
-				.post-tags-categories {
-					flex-direction: column;
-					align-items: flex-start;
-					gap: 0.5rem;
-				}
 			}
 		</style>
 	</body>
