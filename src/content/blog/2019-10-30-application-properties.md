@@ -3,11 +3,8 @@ title: "프로퍼티를 이용한 객체관리와 Reflaction"
 description: "오랜만에 돌아온 WEB/Servlet 포스팅이다."
 pubDate: 2019-10-30
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Java", "Servlet", "Basic"]
+tags: ["Java", "OOP", "Servlet"]
 ---
-
-
 ## 프로퍼티
 
 ---

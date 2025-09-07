@@ -3,11 +3,8 @@ title: "Programmers(완전탐색)_단체사진 찍기"
 description: "2017 카카오코드 본선 1번 문제로써 최대 `8! (약 40000)`번의 계산 횟수를 갖는 `완전 탐색` 문제이다. 다시말해 개의 for문으로 구현을 해도 문제가 없다."
 pubDate: 2020-01-27
 author: "Bong5"
-categories: ["Algorithm"]
-tags: ["Programmers"]
+tags: ["Algorithm", "Programmers"]
 ---
-
-
 ### 문제 설명
 
 가을을 맞아 카카오프렌즈는 단체로 소풍을 떠났다. 즐거운 시간을 보내고 마지막에 단체사진을 찍기 위해 카메라 앞에 일렬로 나란히 섰다.

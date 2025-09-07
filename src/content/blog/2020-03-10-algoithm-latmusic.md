@@ -3,11 +3,8 @@ title: "Programmers(KAKAO) 방금 그곡"
 description: "---"
 pubDate: 2020-03-10
 author: "Bong5"
-categories: ["Algorithm"]
-tags: ["Programmers"]
+tags: ["Algorithm", "Programmers"]
 ---
-
-
 ### 문제 설명
 
 [문제 출처](https://programmers.co.kr/learn/courses/30/lessons/17683)

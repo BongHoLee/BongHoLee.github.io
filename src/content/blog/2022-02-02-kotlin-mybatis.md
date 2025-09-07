@@ -3,11 +3,8 @@ title: "Kotlin - MyBatis"
 description: "이 포스트에 대한 설명"
 pubDate: 2022-02-02
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Kotlin"]
+tags: ["Kotlin"]
 ---
-
-
 <img src="/assets/img/kotlin/img3.GIF" width="70%" height="auto" >
 
 <br>

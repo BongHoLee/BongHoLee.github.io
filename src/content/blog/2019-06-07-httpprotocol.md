@@ -3,11 +3,8 @@ title: "Http Protocol"
 description: "웹 개발을 함에 있어 Http Servlet, Http Protocol 등 보다 원론적인 개념에 대해 많이 부족함을 느껴 다시 한번 정리하는 기회를 갖겠다."
 pubDate: 2019-06-07
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Java", "Basic"]
+tags: ["HTTP", "Java"]
 ---
-
-
 ## Http Protocol
 
 ---

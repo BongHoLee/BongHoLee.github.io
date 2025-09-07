@@ -3,11 +3,8 @@ title: "주니어 개발자 쿠크 멘탈 탈출기"
 description: "__주니어 개발자 쿠크 멘탈 탈출기__ 라는 제목의 포스트가 마음에 와닿아 옮겨본다."
 pubDate: 2019-08-15
 author: "Bong5"
-categories: ["Programming"]
 tags: ["Insight"]
 ---
-
-
 ## Junior Developer?!
 
 ---

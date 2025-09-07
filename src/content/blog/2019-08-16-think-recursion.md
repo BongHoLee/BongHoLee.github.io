@@ -3,11 +3,8 @@ title: "재귀에 관한 고찰"
 description: "최근 업무를 하던 도중 노드의 트리구조를 __Recursion__ 을 사용해서 구현하는 코드를 보고 충격을 받았다."
 pubDate: 2019-08-16
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Insight", "Theory"]
+tags: ["Insight", "Recursion", "Theory"]
 ---
-
-
 ## Recursion
 
 ---

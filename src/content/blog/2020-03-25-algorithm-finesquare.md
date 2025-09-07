@@ -3,11 +3,8 @@ title: "Programmers 올바른 정사각형"
 description: "문제를 보면 알 수 있듯이 `패턴 찾기` 문제이다."
 pubDate: 2020-03-25
 author: "Bong5"
-categories: ["Algorithm"]
-tags: ["Programmers"]
+tags: ["Algorithm", "Programmers"]
 ---
-
-
 ### 문제 설명
 
 [문제 출처](https://programmers.co.kr/learn/courses/30/lessons/62048)

@@ -3,11 +3,8 @@ title: "클래스 로딩 과정"
 description: "이 포스트에 대한 설명"
 pubDate: 2022-02-01
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Java"]
+tags: ["Java"]
 ---
-
-
 **클래스 로딩은 `인스턴스 로딩`, `인스턴스 생성`이 아님을 반드시 기억하자**
 
 **클래스 로딩은 말 그대로 인스턴스 생성 전 클래스에 대한 메타 정보와 바이트 코드들을 `JVM(Method Area)`에 로딩하는 것을 말한다.**

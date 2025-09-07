@@ -3,11 +3,8 @@ title: "주니어 개발자가 가장 많이하는 실수"
 description: "유튜브에서 우연히 본 __주니어 개발자들이 저지르는 실수 3가지__ 를 참고하여 거울로 삼아보자."
 pubDate: 2019-08-15
 author: "Bong5"
-categories: ["Programming"]
 tags: ["Insight"]
 ---
-
-
 ## Junior Developer?!
 
 ---

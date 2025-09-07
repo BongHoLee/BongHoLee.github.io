@@ -3,11 +3,8 @@ title: "SpringMVC - 핸들러 어댑터, 핸들러 매핑"
 description: "**DispatcherServlet**이 클라이언트로부터 요청을 받아서"
 pubDate: 2021-12-30
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Spring_Framework", "Spring_Boot"]
+tags: ["Spring", "Spring Boot"]
 ---
-
-
 ## title: SpringMVC - 핸들러 어댑터, 핸들러 매핑
 
 ---

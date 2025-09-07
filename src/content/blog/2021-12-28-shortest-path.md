@@ -3,11 +3,8 @@ title: "최단 경로"
 description: "`최단경로` 문제란 **두 노드를 잇는 가장 짧은 경로**를 찾는 문제다. **가중치가 있는 그래프**(Weighted graph)에서는 가중치의 합이 최소가 되는 경로를 찾는것이 목적이다."
 pubDate: 2021-12-28
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Theory"]
+tags: ["Algorithm", "Theory"]
 ---
-
-
 ## 최단 경로
 
 ---

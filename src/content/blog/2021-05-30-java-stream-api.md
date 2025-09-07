@@ -3,11 +3,8 @@ title: "Java Stream API(1-1)"
 description: "`Stream`을 사용하면 데이터를 `선언형`으로 처리할 수 있다. 여기서 `선언형`이란 의미가 와닿지 않는다면 **데이터를 'How(어떻게)' 처리하는지를 기술하는게 아니라 `What(무엇)`을 하는지를 기술하는 것이라고 이해하면 쉽다.**"
 pubDate: 2021-05-30
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Java"]
+tags: ["Java"]
 ---
-
-
 ## 들어가며
 
 이전 버전과 비교하여 자바8에서는 상당히 많은 내용들이 추가되었다. 그 중 가장 도드라지게 많이 사용되는 것이 `Stream API`일 것이다.

@@ -3,11 +3,8 @@ title: "Programmers(KAKAO) 캐시"
 description: "기본적으로 `LRU(Least Recently Used)`에 대한 지식이 필요한 문제이다. 나같은 경우 찾아보기 귀찮아서 예제 입출력을 보고 `캐시 내에서 더 많이 hit한 요소가 가장 오래 유지`하는 것으로 오해하여 `우선순위 큐`를 이용하여 접근을 하였다."
 pubDate: 2020-03-08
 author: "Bong5"
-categories: ["Algorithm"]
-tags: ["Programmers"]
+tags: ["Algorithm", "Programmers"]
 ---
-
-
 ### 문제 설명
 
 [문제 출처](https://programmers.co.kr/learn/courses/30/lessons/17680)

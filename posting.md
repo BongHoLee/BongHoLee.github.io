@@ -47,7 +47,6 @@ title: "포스트 제목"
 description: "포스트에 대한 간단한 설명 (SEO용, 150자 이내)"
 pubDate: 2025-09-06
 author: "Bong5"
-categories: ["Programming"]  # 주 카테고리 1개 권장
 tags: ["JavaScript", "React", "Frontend"]  # 관련 태그들
 heroImage: /assets/images/post-image.jpg  # 선택사항
 ---
@@ -61,20 +60,13 @@ heroImage: /assets/images/post-image.jpg  # 선택사항
 | `description` | ✅ | SEO용 설명 (150자 이내) | "클린 코드 작성을 위한 핵심 원칙들" |
 | `pubDate` | ✅ | 발행 날짜 (YYYY-MM-DD) | 2025-09-06 |
 | `author` | ✅ | 작성자 | "Bong5" |
-| `categories` | ✅ | 주 카테고리 (1개 권장) | ["Programming"] |
 | `tags` | ✅ | 관련 태그들 | ["JavaScript", "React"] |
 | `heroImage` | ⭕ | 대표 이미지 경로 | /assets/images/hero.jpg |
 | `updatedDate` | ⭕ | 수정 날짜 | 2025-09-07 |
 
-### 카테고리 목록
+### 태그 가이드
 
-현재 사용 중인 주요 카테고리:
-
-- **Programming**: 프로그래밍 언어, 기술, 개발 관련
-- **Algorithm**: 자료구조, 알고리즘 문제해결
-- **Book-Review**: 기술서적 리뷰 및 요약
-- **System-Design**: 아키텍처, 설계 패턴
-- **DevOps**: 배포, 운영, 도구
+관련성 높은 태그만 1–5개 정도 지정하는 것을 권장합니다. 예: Java, Spring, Algorithm, Clean Code, DevOps 등
 
 ---
 
@@ -86,7 +78,6 @@ title: "React Hooks 완전 정복하기"
 description: "React Hooks의 핵심 개념부터 고급 패턴까지 실무에 바로 적용할 수 있는 완전한 가이드"
 pubDate: 2025-09-06
 author: "Bong5"
-categories: ["Programming"]
 tags: ["React", "Hooks", "JavaScript", "Frontend"]
 ---
 

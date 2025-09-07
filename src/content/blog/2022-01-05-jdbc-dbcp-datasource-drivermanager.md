@@ -3,11 +3,8 @@ title: "JDBC vs DBCP - DataSource vs DriverManager"
 description: "`JDBC`, `DBCP` 모두 `Java` 진영에서 `DB Connection`을 위해 사용하는 방법"
 pubDate: 2022-01-05
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Java", "Spring_Framework", "Spring_Boot"]
+tags: ["Java", "Spring", "Spring Boot"]
 ---
-
-
 JDBC vs DBCP - DataSource vs DriverManager
 
 ---

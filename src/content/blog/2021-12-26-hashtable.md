@@ -3,11 +3,8 @@ title: "해쉬테이블(with JAVA HashMap)"
 description: "이 포스트에 대한 설명"
 pubDate: 2021-12-26
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Java"]
+tags: ["Hashing", "Java"]
 ---
-
-
 <img src="/assets/img/java/img1.GIF" width="80%" height="auto" >
 
 - `해쉬 테이블`은 일반적으로 `배열`이다.

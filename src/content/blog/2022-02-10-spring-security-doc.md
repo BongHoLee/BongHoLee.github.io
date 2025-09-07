@@ -3,11 +3,8 @@ title: "Spring Security 공식 문서 톺아보기(1)"
 description: "이 포스트에 대한 설명"
 pubDate: 2022-02-10
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Spring_Framework", "Spring_Boot"]
+tags: ["Spring", "Spring Boot", "Spring Security"]
 ---
-
-
 ### 스프링 부트 Auto Configuration
 
 스프링 부트 `Auto Configuration`이 아래와 같은 작업을 진행

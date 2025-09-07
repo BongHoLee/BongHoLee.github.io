@@ -3,11 +3,8 @@ title: "트리와 이진트리(인프런 강좌)"
 description: "**_계층적인 구조를 표현한다._**"
 pubDate: 2020-04-02
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Theory"]
+tags: ["Theory", "Tree"]
 ---
-
-
 ## 트리와 이진트리
 
 ---

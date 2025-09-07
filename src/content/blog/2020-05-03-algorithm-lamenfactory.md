@@ -3,11 +3,8 @@ title: "Programmers(Heap) 라면공장"
 description: "`Heap` 유형으로 분류되었지만 문제 풀이의 흐름을 먼저 살펴보자."
 pubDate: 2020-05-03
 author: "Bong5"
-categories: ["Algorithm"]
-tags: ["Programmers"]
+tags: ["Algorithm", "Programmers"]
 ---
-
-
 ### 문제 설명
 
 [문제 출처](https://programmers.co.kr/learn/courses/30/lessons/42629)

@@ -3,12 +3,8 @@ title: "Spring Security - Form 기반 인증"
 description: "<br>"
 pubDate: 2022-03-20
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Spring_Framework", "Spring_Boot"]
+tags: ["Spring", "Spring Boot", "Spring Security"]
 ---
-
-
-
 ### 생각할 거리
 
 Spring-Session과 Spring Security는 특별한 바인딩이 필요 없이 개별 Config만 설정해주면 되는 것 같다.

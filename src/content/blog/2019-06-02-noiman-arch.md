@@ -3,12 +3,8 @@ title: "폰 노이만 아키텍쳐"
 description: "이 포스트에 대한 설명"
 pubDate: 2019-06-02
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Java"]
+tags: ["Java"]
 ---
-
-
-
 ## 폰 노이만 아키텍처
 4개의 기본 하드웨어 구성요소
 - 입력장치

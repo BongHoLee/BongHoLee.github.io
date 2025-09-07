@@ -3,11 +3,8 @@ title: "이진 탐색 트리(인프런 강좌)"
 description: "- `Dynamic Set`을 `트리`의 형태로 구현"
 pubDate: 2020-04-08
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Theory"]
+tags: ["Theory", "Tree"]
 ---
-
-
 ## 이진 검색 트리
 
 <img src="/assets/img/BST16.PNG" width="100%" height="auto">

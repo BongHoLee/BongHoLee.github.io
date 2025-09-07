@@ -3,11 +3,8 @@ title: "Java Reflaction(리플랙션)"
 description: "최근 자바 웹 프로그래밍 기초를 학습하면서 Servlet, JSP를 지나 기본적인 Spring MVC 모델을 따르는 __미니 MVC 프레임워크__ 를 만드는 실습중이다."
 pubDate: 2019-09-21
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Java", "Keywords"]
+tags: ["Java"]
 ---
-
-
 ## Reflaction
 
 ---

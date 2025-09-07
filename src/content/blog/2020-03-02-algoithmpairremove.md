@@ -3,11 +3,8 @@ title: "Programmers(Stack) 짝지어 제거하기"
 description: "문제 자체만 보았을 때 어렵지 않다. 문자열을 검사하여 반복된 문자들을 제거하는 방향으로 생각하면 쉽게 풀린다."
 pubDate: 2020-03-02
 author: "Bong5"
-categories: ["Algorithm"]
-tags: ["Programmers"]
+tags: ["Algorithm", "Programmers"]
 ---
-
-
 ### 문제 설명
 
 [문제 출처](https://programmers.co.kr/learn/courses/30/lessons/12973)

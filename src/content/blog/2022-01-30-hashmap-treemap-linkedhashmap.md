@@ -3,11 +3,8 @@ title: "HashMap, TreeMap, LinkedHashMap"
 description: "이 포스트에 대한 설명"
 pubDate: 2022-01-30
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Java"]
+tags: ["Hashing", "Java", "Tree"]
 ---
-
-
 `Map`은 `해시`라고도 하며 `Key-Value` 형태의 저장소다.
 
 자바 `Collection API`의 일부지만 `List` 인터페이스와 달리 **Collections 인터페이스를 구현하지 않는다.**

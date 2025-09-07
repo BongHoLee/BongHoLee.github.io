@@ -3,11 +3,8 @@ title: "GenericServlet"
 description: "이전에 서블릿 클래스는 서블릿 인터페이스를 구현하고 서블릿 컨테이너에 의해 init(), service(), destory() 등의 메소드를 호출함으로써 메모리 로딩, 서비스 수행, 메모리 해제 등의 과정을 거치는 것을 알았다."
 pubDate: 2019-06-21
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Java", "Servlet"]
+tags: ["Java", "Servlet"]
 ---
-
-
 ## GenericServlet
 
 ---

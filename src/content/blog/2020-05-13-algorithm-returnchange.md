@@ -3,11 +3,8 @@ title: "Programmer(DP) 거스름돈"
 description: "한 번 쯤은 접해봤을 법 한 `거스름돈` 문제이다."
 pubDate: 2020-05-13
 author: "Bong5"
-categories: ["Algorithm"]
-tags: ["Programmers"]
+tags: ["Algorithm", "Programmers"]
 ---
-
-
 ### 문제 설명
 
 - [출처](https://programmers.co.kr/learn/courses/30/lessons/12907)

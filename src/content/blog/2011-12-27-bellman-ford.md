@@ -3,11 +3,8 @@ title: "벨만 포드 알고리즘(그래프 최단거리)"
 description: "- [적절한 예시와 함께 개념, 시간복잡도까지 설명](https://ratsgo.github.io/data%20structure&algorithm/2017/11/27/bellmanford/) but `V-1`(경로의 길이) 설명이 조금 아쉬움"
 pubDate: 2011-12-27
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Theory"]
+tags: ["Algorithm", "Theory"]
 ---
-
-
 ## 벨만 포드 알고리즘
 
 ---

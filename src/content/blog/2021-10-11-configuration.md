@@ -3,11 +3,8 @@ title: "스프링 @Configuration에 관하여 (feat.CGLIB)"
 description: "`스프링 컨테이너`에 `Bean`을 등록하는 방법은 다양하다."
 pubDate: 2021-10-11
 author: "Bong5"
-categories: ["DevOps"]
-tags: ["Keywords", "Spring_Framework", "Spring_Boot"]
+tags: ["DevOps", "Spring", "Spring Boot"]
 ---
-
-
 ## @Configuration
 
 ---

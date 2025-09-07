@@ -3,11 +3,8 @@ title: "HttpSession & Spring Session"
 description: "`HttpSession`은 `Spring`이 아니라 `Tomcate`과 같은 `Servlet Container`가 생성하여 Spring에 주입한다. **Tomcat은 기본적으로 HttpSession의 구현체로 StandardSession을 사용한다.**"
 pubDate: 2022-01-02
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Spring_Framework", "Spring_Boot"]
+tags: ["HTTP", "Session", "Spring", "Spring Boot"]
 ---
-
-
 ## HttpSession & Spring Session
 
 ---

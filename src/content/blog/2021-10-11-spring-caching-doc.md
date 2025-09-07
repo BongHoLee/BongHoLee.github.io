@@ -3,11 +3,8 @@ title: "Spring Cache 기본"
 description: "기본적으로 `캐싱`은 **반복적으로 접근하는 데이터에 대한 성능 향상**을 위해 사용된다."
 pubDate: 2021-10-11
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Spring_Framework", "Spring_Boot"]
+tags: ["Cache", "Spring", "Spring Boot"]
 ---
-
-
 ## Spring Cache
 
 ---

@@ -3,11 +3,8 @@ title: "Recursion의 수학적 귀납법"
 description: "앞서 몇 포스트에서 재귀와 관련된 고찰과 관련된 내용들을 스크랩 하여 게시한 적이 있다."
 pubDate: 2019-08-18
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Theory"]
+tags: ["Recursion", "Theory"]
 ---
-
-
 ## Recursion
 
 ---

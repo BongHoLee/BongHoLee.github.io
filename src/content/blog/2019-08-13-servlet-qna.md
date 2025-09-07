@@ -3,11 +3,8 @@ title: "서블릿의 인스턴스화, session, 멀티스레딩에 관련된 질�
 description: "가끔씩 읽으면서 상기하자."
 pubDate: 2019-08-13
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Insight"]
+tags: ["Insight", "Java", "Session"]
 ---
-
-
 ## Servlet Q&A
 
 ---

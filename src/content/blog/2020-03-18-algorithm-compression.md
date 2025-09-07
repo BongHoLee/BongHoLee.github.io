@@ -3,11 +3,8 @@ title: "Programmers(KAKAO) 2018_압축"
 description: "문제 풀이를 위해 필요한 자료구조는 `Stack`과 `Map`이다."
 pubDate: 2020-03-18
 author: "Bong5"
-categories: ["Algorithm"]
-tags: ["Programmers"]
+tags: ["Algorithm", "Programmers"]
 ---
-
-
 ### 문제 설명
 
 [문제 출처](https://programmers.co.kr/learn/courses/30/lessons/17684)

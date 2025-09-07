@@ -3,11 +3,8 @@ title: "Logstash to Logstash (TCP) 트러블슈팅"
 description: "이 포스트에 대한 설명"
 pubDate: 2021-03-02
 author: "Bong5"
-categories: ["DevOps"]
-tags: ["PoC"]
+tags: ["DevOps", "Logstash", "PoC"]
 ---
-
-
 ## 들어가며
 
 업무에서 `Logstash`를 활용한 `데이터 전달자(SBDS)`, `데이터 사용자(User)` 구축 설계에 대한 테스트를 진행하였다.

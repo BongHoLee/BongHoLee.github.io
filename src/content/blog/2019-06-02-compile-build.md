@@ -3,11 +3,8 @@ title: "Compile & Build"
 description: "이 포스트에 대한 설명"
 pubDate: 2019-06-02
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Java"]
+tags: ["Java"]
 ---
-
-
 ## Compile & Build
 
 

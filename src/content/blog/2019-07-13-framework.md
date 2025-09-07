@@ -3,11 +3,8 @@ title: "Framework/Library"
 description: "면접에서도 단골질문이기도하고 피상적으로만 이해하고 있던 라이브러리와 프레임워크에 대해 이해하는 기회를 갖는다."
 pubDate: 2019-07-13
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Java", "Basic"]
+tags: ["Java"]
 ---
-
-
 ## Framework/Library
 
 ---

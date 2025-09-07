@@ -3,11 +3,8 @@ title: "Web Application Deploy (TOMCAT)"
 description: "그동안 IDE에서만 웹 컨테이너(톰캣)을 구동함으로써 웹 어플리케이션을 실행하고 테스트하느라 실제 운영시 배포 방법에 대해서는 고민해 본적이 없다."
 pubDate: 2019-06-20
 author: "Bong5"
-categories: ["DevOps"]
-tags: ["Keywords", "Java", "Servlet"]
+tags: ["DevOps", "Java", "Servlet"]
 ---
-
-
 ## Web Application Deploy (TOMCAT)
 
 ---

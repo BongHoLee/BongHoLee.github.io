@@ -3,11 +3,8 @@ title: "Gradle dependencies(compileTimeClasspath, runtimeClasspath)"
 description: "이번 학습을 통해 몇 가지 의미있는 것들을 배웠다."
 pubDate: 2022-01-03
 author: "Bong5"
-categories: ["DevOps"]
-tags: ["Keywords", "Java", "Basic"]
+tags: ["DevOps", "Gradle", "Java"]
 ---
-
-
 ## Gradle dependencies(compile-time, runtime)
 
 ---

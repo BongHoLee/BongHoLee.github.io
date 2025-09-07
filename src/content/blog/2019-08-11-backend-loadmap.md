@@ -3,11 +3,8 @@ title: "자바 웹 개발자 로드맵"
 description: "약 한 달이 넘게 개발 공부를 등한시 함에 따라 위기감을 다시 느끼고 의식적 학습과 연습을 위해서 다시금 동기부여를 받았다."
 pubDate: 2019-08-11
 author: "Bong5"
-categories: ["Programming"]
 tags: ["Insight"]
 ---
-
-
 ## 자바 웹 개발자 로드맵 (자바지기)
 
 ---

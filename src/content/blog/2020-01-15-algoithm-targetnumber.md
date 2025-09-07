@@ -3,11 +3,8 @@ title: "Programmers(DFS)_타겟넘버"
 description: "문제 해결의 실마리는 상당히 간단하다. 위 문제는 _+_ 또는 _-_ 로 __분기__ 되기 때문에 단순한 __for 루프__ 로는 해결하기 쉽지 않다."
 pubDate: 2020-01-15
 author: "Bong5"
-categories: ["Algorithm"]
-tags: ["Programmers"]
+tags: ["Algorithm", "Programmers"]
 ---
-
-
 ### 문제 설명
 
 n개의 음이 아닌 정수가 있습니다. 이 수를 적절히 더하거나 빼서 __타겟 넘버__ 를 만드려고 합니다. 예를들어 _[1,1,1,1,1]_ 로 숫자 3을 만들려면 아래와 같이 5가지 방법을 쓸 수 있습니다.

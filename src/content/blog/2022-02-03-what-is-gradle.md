@@ -3,11 +3,8 @@ title: "What is Gradle?"
 description: "이 포스트에 대한 설명"
 pubDate: 2022-02-03
 author: "Bong5"
-categories: ["DevOps"]
-tags: ["Keywords", "Spring_Framework", "Spring_Boot"]
+tags: ["DevOps", "Gradle", "Spring", "Spring Boot"]
 ---
-
-
 ## 개요
 
 `Gradle`은 **빌드 자동화 도구 오픈소스**로써, 다양한 타입의 소프트웨어를 빌드할 수 있게끔 설계되었다. 아래는 큰 그림에서 `Gradle`의 중요한 요소들에 대한 설명이다.

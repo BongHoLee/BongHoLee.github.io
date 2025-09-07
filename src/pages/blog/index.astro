@@ -24,7 +24,6 @@ const posts = (await getCollection('blog')).sort(
 				<p>모든 포스트를 최신순으로 확인해보세요.</p>
 				<div class="blog-stats">
 					<span class="post-count">{posts.length}개의 포스트</span>
-					<a href="/categories/" class="categories-link">카테고리별 보기 →</a>
 				</div>
 			</section>
 			
@@ -46,14 +45,6 @@ const posts = (await getCollection('blog')).sort(
 							)}
 							
 							<div class="post-tags-categories">
-								{post.data.categories && post.data.categories.length > 0 && (
-									<div class="post-categories">
-										{post.data.categories.slice(0, 2).map((category) => (
-											<a href={`/categories/${category.toLowerCase()}/`} class="category">{category}</a>
-										))}
-									</div>
-								)}
-								
 								{post.data.tags && post.data.tags.length > 0 && (
 									<div class="post-tags">
 										{post.data.tags.slice(0, 3).map((tag) => (
@@ -107,15 +98,7 @@ const posts = (await getCollection('blog')).sort(
 				font-weight: 500;
 			}
 			
-			.categories-link {
-				color: #3498db;
-				text-decoration: none;
-				font-weight: 500;
-			}
-			
-			.categories-link:hover {
-				text-decoration: underline;
-			}
+
 			
 			.posts-list {
 				display: flex;
@@ -174,24 +157,7 @@ const posts = (await getCollection('blog')).sort(
 				flex-wrap: wrap;
 			}
 			
-			.post-categories {
-				display: flex;
-				gap: 0.5rem;
-			}
-			
-			.category {
-				background: #3498db;
-				color: white;
-				padding: 0.25rem 0.75rem;
-				border-radius: 15px;
-				font-size: 0.8rem;
-				text-decoration: none;
-				font-weight: 500;
-			}
-			
-			.category:hover {
-				background: #2980b9;
-			}
+
 			
 			.post-tags {
 				display: flex;

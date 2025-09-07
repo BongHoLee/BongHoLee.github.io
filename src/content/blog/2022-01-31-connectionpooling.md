@@ -3,11 +3,8 @@ title: "JDBC Connection Pooling"
 description: "이 포스트에 대한 설명"
 pubDate: 2022-01-31
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Java"]
+tags: ["Java"]
 ---
-
-
 ### 개요
 
 `JDBC Connection`을 얻기 위한 키워드로 `DBCP`, `DataSource`에 대해 알아본다.

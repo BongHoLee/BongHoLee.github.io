@@ -3,11 +3,8 @@ title: "DB냐 Application이냐?"
 description: "이 포스트에 대한 설명"
 pubDate: 2022-02-04
 author: "Bong5"
-categories: ["Programming"]
 tags: ["Insight"]
 ---
-
-
 ### 들어가며
 
 Back-end 개발을 하면서 어떤 데이터 처리를 위해서 **SQL**을 활용할 것이냐 아니면 **DB는 단순히 데이터 소스 역할만 하고 Application에서 처리할 것이냐**로 고민을 하는 경우가 있다.

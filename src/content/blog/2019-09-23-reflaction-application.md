@@ -3,11 +3,8 @@ title: "Reflaction 응용"
 description: "지난 포스팅에서 __리플렉션__ 에 대한 기본적인 개념을 다루었다."
 pubDate: 2019-09-23
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Java", "Servlet", "Basic"]
+tags: ["Java", "Servlet"]
 ---
-
-
 ## Reflaction Application
 
 ---

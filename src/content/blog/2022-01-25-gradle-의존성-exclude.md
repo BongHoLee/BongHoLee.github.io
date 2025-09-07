@@ -3,11 +3,8 @@ title: "TroubleShooting - gradle 의존성 exclude(spring-starter-logging)"
 description: "이 포스트에 대한 설명"
 pubDate: 2022-01-25
 author: "Bong5"
-categories: ["DevOps"]
-tags: ["TroubleShooting"]
+tags: ["DevOps", "Gradle", "OOP", "Spring", "Troubleshooting"]
 ---
-
-
 ### 이슈 내용
 
 `log4j`, `logback` 로깅 라이브러리들의 보안 이슈 관련 버전 업데이트 및 제외가 필요함.

@@ -3,11 +3,8 @@ title: "Programmers(DP)_가장 큰 정사각형"
 description: "문제 해결의 접근법을 찾지 못해 오랜시간 고민한 문제로써 결과적으로 다른사람들의 접근법 및 풀이법을 참고하여 풀이하였다."
 pubDate: 2020-01-27
 author: "Bong5"
-categories: ["Algorithm"]
-tags: ["Programmers"]
+tags: ["Algorithm", "Programmers"]
 ---
-
-
 ### 문제 설명
 
 1과 0으로 채워진 표(board)가 있습니다. 표 1칸은 1x1의 정사각으로 이루어져 있습니다. 표에서 1로 이루어진 가장 큰 정사각을 찾아 넓이를 return 하는 solution 함수를 완성해주세요.

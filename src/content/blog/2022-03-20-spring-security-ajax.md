@@ -3,11 +3,8 @@ title: "Spring Security - Ajax 기반 인증"
 description: "이 포스트에 대한 설명"
 pubDate: 2022-03-20
 author: "Bong5"
-categories: ["Programming"]
-tags: ["Keywords", "Spring_Framework", "Spring_Boot"]
+tags: ["Spring", "Spring Boot", "Spring Security"]
 ---
-
-
 ## 생각할 거리
 
 Ajax가 비동기 호출이면서 주로 `REST API`호출인 점을 감안하면 CSR(vue) 와 유사하게 `Content-type: application-json` 형태일 것 같다.

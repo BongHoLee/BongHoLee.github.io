@@ -3,11 +3,8 @@ title: "Programmers(재귀/DP)_땅따먹기"
 description: "2차원 배열의 `loop` 또는 `재귀`를 이용하여 해결이 가능하다. 또한 `시간 초과`를 피하기 위해 `메모제이션`을 활용해야 보다 효율적인 코드를 짤 수 있겠다."
 pubDate: 2020-02-16
 author: "Bong5"
-categories: ["Algorithm"]
-tags: ["Programmers"]
+tags: ["Algorithm", "Programmers"]
 ---
-
-
 ### 문제 설명
 
 [문제 출처](https://programmers.co.kr/learn/courses/30/lessons/12913)
