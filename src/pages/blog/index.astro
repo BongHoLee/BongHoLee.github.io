@@ -14,13 +14,13 @@ const posts = (await getCollection('blog')).sort(
 <!doctype html>
 <html lang="ko">
 	<head>
-		<BaseHead title={`Blog | ${SITE_TITLE}`} description="모든 블로그 포스트를 최신순으로 확인하세요." />
+		<BaseHead title={`Home | ${SITE_TITLE}`} description="모든 블로그 포스트를 최신순으로 확인하세요." />
 	</head>
 	<body>
 		<Header title={SITE_TITLE} />
 		<main>
 			<section class="blog-header">
-				<h1>📝 Blog</h1>
+				<h1>🏠 Home</h1>
 				<p>모든 포스트를 최신순으로 확인해보세요.</p>
 				<div class="blog-stats">
 					<span class="post-count">{posts.length}개의 포스트</span>
