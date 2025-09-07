@@ -188,29 +188,47 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			/* 인용문 스타일 */
 			.prose :global(blockquote) {
 				margin: 2rem 0;
-				padding: 1.5rem;
+				padding: 1.5rem 2rem;
 				background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
 				border-left: 4px solid #3b82f6;
 				border-radius: 0 12px 12px 0;
 				font-style: italic;
 				color: #475569;
 				position: relative;
+				font-size: 1.1rem;
+				line-height: 1.7;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 			}
 			
 			.prose :global(blockquote::before) {
 				content: '"';
-				font-size: 4rem;
+				font-size: 1.5rem;
 				color: #3b82f6;
 				position: absolute;
-				top: -0.5rem;
-				left: 1rem;
-				opacity: 0.3;
+				top: 1rem;
+				left: 0.75rem;
+				font-weight: 700;
+				opacity: 0.8;
+				font-family: Georgia, serif;
+			}
+			
+			.prose :global(blockquote::after) {
+				content: '"';
+				font-size: 1.5rem;
+				color: #3b82f6;
+				position: absolute;
+				bottom: 0.5rem;
+				right: 0.75rem;
+				font-weight: 700;
+				opacity: 0.8;
+				font-family: Georgia, serif;
 			}
 			
 			.prose :global(blockquote p) {
 				margin: 0.5rem 0;
 				position: relative;
 				z-index: 1;
+				padding: 0 0.5rem;
 			}
 			
 			/* 코드 스타일 */
