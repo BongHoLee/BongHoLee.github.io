@@ -89,6 +89,7 @@ p {
 }
 .prose p {
 	margin-bottom: 2em;
+	white-space: pre-line;
 }
 textarea {
 	width: 100%;
