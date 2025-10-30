@@ -6,1039 +6,582 @@ author: "Bong5"
 tags: ["AI", "thought"]
 ---
 
-# Claude Code CLI 완전 가이드
+# Claude Code settings.json 완전 정리 (공식문서 + 실전 팁)
 
-## 목차
-1. [개요](#개요)
-2. [settings.json 표준 규격](#settingsjson-표준-규격)
-3. [실행 메커니즘](#실행-메커니즘)
-4. [설정 수정 및 적용](#설정-수정-및-적용)
-5. [실전 활용 전략](#실전-활용-전략)
-6. [문제 해결](#문제-해결)
+## 1. settings.json 개요
 
----
+settings.json은 Claude Code의 공식 설정 메커니즘으로, 도구 권한, 환경 변수, 훅, MCP 서버 등을 정의합니다.
 
-## 개요
+### 1.1 설정 파일 계층 구조 (우선순위 순)
 
-### Claude Code CLI란?
-- 터미널 기반 에이전틱 코딩 도구
-- 코드베이스와 직접 상호작용 (파일 읽기/쓰기, Git 작업, 테스트 실행 등)
-- `.claude/settings.json`을 통한 설정 관리
-
-### 핵심 구성 요소
 ```
-Claude Code CLI
-├── settings.json (설정 파일)
-├── MCP 서버 (외부 도구 연결)
-└── 내장 도구 (Read, Write, Bash, TodoWrite 등)
+1. Enterprise 관리 설정 (최우선, 재정의 불가)
+   ├─ macOS: /Library/Application Support/ClaudeCode/managed-settings.json
+   ├─ Linux: /etc/claude-code/managed-settings.json
+   └─ Windows: C:\ProgramData\ClaudeCode\managed-settings.json
+
+2. 프로젝트 로컬 설정 (Git 제외, 개인 실험용)
+   └─ .claude/settings.local.json
+
+3. 프로젝트 설정 (팀 공유, Git 체크인)
+   └─ .claude/settings.json
+
+4. 사용자 설정 (모든 프로젝트 적용)
+   └─ ~/.claude/settings.json
 ```
 
----
+**핵심 원칙:**
+- 상위 우선순위 파일이 하위 파일의 값을 병합하여 재정의
+- deny 규칙이 allow 규칙보다 항상 우선
+- 설정 변경 후 Claude Code 재시작 필요 (Hot reload 미지원)
 
-## settings.json 표준 규격
+## 2. 주요 설정 필드
 
-### 기본 구조
+### 2.1 permissions (권한 제어)
+
+도구 실행 권한을 `deny`, `allow`, `ask` 배열로 제어합니다.
+
+#### 권한 패턴 문법
+
+```
+기본 형식:
+- ToolName                    : 모든 작업 허용
+- ToolName(*)                 : 모든 인자 허용
+- ToolName(pattern)           : 패턴 매칭되는 호출만
+
+파일 패턴 (gitignore 문법):
+- Read(**)                    : 모든 파일
+- Read(./src/**)              : src 디렉토리만
+- Read(**/.env)               : 모든 .env 파일
+
+명령어 패턴:
+- Bash(git:*)                 : 모든 git 명령
+- Bash(npm run test:*)        : npm test 스크립트만
+- Bash(sudo:*)                : sudo 명령 차단용
+```
+
+#### 주요 도구
+
+| 도구 | 설명 | 패턴 지원 |
+|------|------|-----------|
+| Read | 파일 읽기 | gitignore 문법 |
+| Write | 파일 쓰기 | gitignore 문법 |
+| Edit | 파일 수정 | gitignore 문법 |
+| Bash | 셸 명령 실행 | 명령어 패턴 |
+| WebFetch | HTTPS 요청 | 도메인 지정 가능 |
+| WebSearch | 웹 검색 | 패턴 미지원 |
+
+#### 실전 패턴: 안전한 개발 모드
 
 ```json
 {
-  "mcpServers": {
-    "서버이름": {
-      "command": "실행명령어",
-      "args": ["인자1", "인자2"],
-      "env": {
-        "환경변수": "값"
-      }
-    }
-  },
-  "permissionPolicy": {
-    "allowedCommands": ["허용할", "명령어"],
-    "blockedCommands": ["차단할", "명령어"],
-    "allowedPaths": ["/허용/경로"],
-    "blockedPaths": ["/차단/경로"]
-  },
-  "toolApprovalPolicy": {
-    "autoApprove": ["자동승인할도구"],
-    "alwaysAsk": ["항상물어볼도구"]
-  },
-  "security": {
-    "dangerouslyAllowAnyCommand": false,
-    "requireExplicitFileAccess": true
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Write(./src/**)",
+      "Write(./tests/**)",
+      "Edit(./src/**)",
+      "Edit(./tests/**)",
+      "Bash(npm run:*)",
+      "Bash(npm test:*)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [
+      "Read(./.env*)",
+      "Read(./secrets/**)",
+      "Write(./.env*)",
+      "Write(./package-lock.json)",
+      "Bash(rm -rf *)",
+      "Bash(sudo:*)",
+      "Bash(git push:*)",
+      "Bash(npm publish)"
+    ],
+    "ask": [
+      "Bash(npm install:*)",
+      "Bash(git checkout:*)"
+    ]
   }
 }
 ```
 
-### 필드별 상세 설명
+**설계 원칙:**
+- 읽기는 자유롭게, 쓰기는 src/tests만
+- 민감 파일(`.env`, `secrets/`)은 완전 차단
+- 위험한 명령(sudo, rm -rf, push)은 차단
+- 의존성 설치와 브랜치 전환은 승인 요청
 
-#### 1. mcpServers (필수)
-MCP(Model Context Protocol) 서버 설정
+### 2.2 env (환경 변수)
+
+세션에 자동으로 설정할 환경 변수를 정의합니다.
+
+```json
+{
+  "env": {
+    "NODE_ENV": "development",
+    "DEBUG": "true",
+    "API_BASE_URL": "http://localhost:3000"
+  }
+}
+```
+
+**활용 시나리오:**
+- 팀 전체 환경 변수 표준화
+- 개발/테스트 환경 자동 설정
+- 세션마다 반복 설정 제거
+
+### 2.3 hooks (훅)
+
+도구 실행 전후나 특정 이벤트 시점에 셸 명령을 자동 실행합니다.
+
+#### Hook 이벤트 타입
+
+| 이벤트 | 실행 시점 | 차단 가능 |
+|--------|-----------|-----------|
+| PreToolUse | 도구 실행 전 | ✓ (exit 2) |
+| PostToolUse | 도구 완료 후 | ✗ (이미 실행됨) |
+| Notification | Claude 알림 시 | ✗ |
+| Stop | 응답 완료 시 | ✓ (exit 2) |
+
+#### Exit Code 동작
+
+- `0`: 성공, 계속 진행
+- `1`: 일반 오류, stderr를 사용자에게 표시
+- `2`: 차단 (PreToolUse는 도구 차단, PostToolUse는 Claude에 오류 표시)
+
+#### 환경 변수
+
+- `$CLAUDE_TOOL_NAME`: 실행된 도구 이름
+- `$CLAUDE_FILE_PATHS`: 영향받은 파일 경로들 (공백 구분)
+- `$CLAUDE_PROJECT_DIR`: 프로젝트 루트 디렉토리
+
+#### 실전 팁 1: 데스크톱 알림
+
+```json
+{
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude needs your input\" with title \"Claude Code\"'"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**macOS/Linux 알림 명령어:**
+- macOS: `osascript -e 'display notification "..." with title "..."'`
+- Linux: `notify-send 'Claude Code' 'Awaiting your input'`
+- Windows: PowerShell 스크립트 사용
+
+#### 실전 팁 2: Git 워크플로우 자동화
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git add -A && git commit -m \"Claude Code checkpoint: $(date +%Y-%m-%d_%H:%M:%S)\" || true"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**동작:**
+- 세션 완료 시 자동으로 모든 변경사항을 커밋
+- 타임스탬프로 체크포인트 생성
+- `|| true`로 커밋 실패 시에도 계속 진행
+
+**주의사항:**
+- 모든 변경사항이 자동 커밋되므로 의도하지 않은 파일도 포함될 수 있음
+- 프로덕션 환경보다는 실험적 개발에 적합
+- `.gitignore` 설정을 확실히 해야 함
+
+### 2.4 sandbox (샌드박스 설정)
+
+bash 명령을 파일시스템과 네트워크로부터 격리합니다.
+
+```json
+{
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "excludedCommands": ["docker"],
+    "network": {
+      "allowUnixSockets": ["/var/run/docker.sock"]
+    }
+  }
+}
+```
+
+**참고:**
+- 파일시스템/네트워크 제한은 Read, Edit, WebFetch 권한 규칙으로 구성
+- sandbox 설정은 bash 명령 격리에 특화
+
+### 2.5 mcpServers (MCP 서버 설정)
+
+Model Context Protocol 서버로 Claude의 기능을 확장합니다.
 
 ```json
 {
   "mcpServers": {
-    "github": {
+    "filesystem": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_TOKEN": "ghp_your_token_here"
-      }
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/allowed/path"]
     },
-    "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/workspace"]
+    "puppeteer": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "mcp/puppeteer"]
     }
   }
 }
 ```
 
-**스키마:**
-- `command`: 실행 가능한 명령어 (문자열)
-- `args`: 명령어 인자 배열 (문자열 배열)
-- `env`: 환경 변수 객체 (선택적)
+**표준 방식:**
+- `.mcp.json` 파일에 정의하는 것이 표준
+- settings.json에도 포함 가능
+- `--mcp-debug` 플래그로 디버깅 가능
 
-#### 2. permissionPolicy (선택적)
-명령어 및 파일 접근 제어
+**주요 MCP 서버:**
+- `@modelcontextprotocol/server-filesystem`: 파일시스템 접근
+- `mcp/puppeteer`: 브라우저 자동화
+- Sentry, 데이터베이스 등 커스텀 서버 가능
+
+### 2.6 기타 설정
 
 ```json
 {
-  "permissionPolicy": {
-    "allowedCommands": ["git", "npm", "docker", "./gradlew"],
-    "blockedCommands": ["rm -rf", "sudo", "chmod 777"],
-    "allowedPaths": [
-      "/Users/username/projects",
-      "/workspace"
+  "model": "claude-sonnet-4-5-20250929",
+  "statusLine": "Project: ${PROJECT_NAME} | Branch: ${GIT_BRANCH}",
+  "spinnerTipsEnabled": false,
+  "cleanupPeriodDays": 30,
+  "disableBypassPermissionsMode": "disable"
+}
+```
+
+## 3. CLAUDE.md: 프로젝트 컨텍스트 관리
+
+### 3.1 개념
+
+CLAUDE.md는 Claude Code가 자동으로 컨텍스트에 로드하는 특수 파일입니다. 프로젝트별 규칙, 컨벤션, 명령어를 문서화하여 매번 설명하지 않아도 Claude가 이해하도록 합니다.
+
+### 3.2 계층적 로딩 순서
+
+```
+1. ~/.claude/CLAUDE.md           (전역 설정)
+2. <project-root>/CLAUDE.md      (프로젝트 설정)
+3. <subdirectory>/CLAUDE.md      (서브디렉토리 설정)
+```
+
+더 구체적인(nested) CLAUDE.md가 우선순위를 가집니다.
+
+### 3.3 효과적인 CLAUDE.md 구조
+
+```markdown
+# 프로젝트 개요
+Spring Boot 기반 커머스 플랫폼 백엔드 API
+
+## 기술 스택
+- Kotlin 1.9 + Spring Boot 3.2
+- R2DBC + MySQL (reactive)
+- Redis (캐싱)
+- Gradle Kotlin DSL
+
+## 빌드 & 실행
+- 빌드: `./gradlew build`
+- 테스트: `./gradlew test`
+- 로컬 실행: `./gradlew bootRun`
+
+## 코딩 컨벤션
+- 함수명: camelCase, 클래스명: PascalCase
+- 파일당 최대 500라인
+- 함수당 최대 30라인
+- Suspend 함수는 동사 + Async 접미사
+
+## 아키텍처 규칙
+- 헥사고날 아키텍처 준수
+- domain: 비즈니스 로직만 (외부 의존성 금지)
+- application: 유즈케이스 오케스트레이션
+- infrastructure: 외부 시스템 연동
+- 포트-어댑터 패턴 엄격히 적용
+
+## 테스트 전략
+- 비즈니스 로직: 단위 테스트 필수
+- 통합 테스트: @SpringBootTest + Testcontainers
+- Mockk 사용, MockBean은 최소화
+
+## 주의사항
+- `.env` 파일 절대 커밋 금지
+- main 브랜치 직접 푸시 금지
+- API 응답은 항상 ResponseEntity 래핑
+- 트랜잭션 경계는 application 계층에서만
+```
+
+### 3.4 CLAUDE.md 최적화 팁
+
+**✅ DO:**
+- 프로젝트 특화 규칙과 컨벤션 명시
+- 자주 사용하는 명령어 문서화 (빌드, 테스트, 실행)
+- 아키텍처 패턴과 설계 원칙 설명
+- 알려진 이슈나 주의사항 기록
+- 팀 특화 용어나 도메인 지식 정리
+
+**❌ DON'T:**
+- 너무 장황하게 작성 (토큰 소비 증가)
+- 일반적인 프로그래밍 지식 반복
+- 자주 변경되는 동적 정보 포함
+- 민감한 정보 (API 키, 비밀번호) 포함
+- 500줄 이상 넘어가면 리팩토링 고려
+
+### 3.5 동적 업데이트
+
+**`#` 키를 활용한 실시간 업데이트:**
+- 대화 중 `#` 키를 누르면 instruction prompt 열림
+- 세션 중 발견한 개선사항을 즉시 CLAUDE.md에 반영
+- 자동으로 파일에 추가되어 다음 세션부터 적용
+
+**예시 워크플로우:**
+```
+1. Claude가 잘못된 패턴 적용
+2. 사용자가 올바른 방식 설명
+3. `#` 눌러 "앞으로 [올바른 방식] 적용" 추가
+4. CLAUDE.md 자동 업데이트
+5. 다음 세션부터 자동 적용
+```
+
+### 3.6 서브디렉토리 CLAUDE.md 활용
+
+```
+project/
+├─ CLAUDE.md              # 전체 프로젝트 규칙
+├─ src/
+│  ├─ CLAUDE.md          # 소스 코드 규칙
+│  └─ domain/
+│     └─ CLAUDE.md       # 도메인 계층 특화 규칙
+└─ tests/
+   └─ CLAUDE.md          # 테스트 작성 가이드
+```
+
+**예시: `tests/CLAUDE.md`**
+```markdown
+# 테스트 작성 가이드
+
+## 테스트 네이밍
+- `should[동작]When[조건]` 형식
+- 예: `shouldReturnUserWhenValidIdProvided`
+
+## Given-When-Then 구조 엄수
+```kotlin
+@Test
+fun `should calculate total price when multiple items exist`() {
+    // Given
+    val items = listOf(...)
+    
+    // When
+    val result = calculator.calculate(items)
+    
+    // Then
+    assertThat(result).isEqualTo(expected)
+}
+```
+
+## Fixture 사용
+- `TestFixtures.createUser()` 등 재사용 가능한 픽스처 활용
+```
+
+## 4. 팀 협업을 위한 표준화 전략
+
+### 4.1 간단하면서 직관적인 표준 설정
+
+**프로젝트 `.claude/settings.json` (Git 체크인)**
+```json
+{
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Write(./src/**)",
+      "Write(./tests/**)",
+      "Edit(./src/**)",
+      "Edit(./tests/**)",
+      "Bash(./gradlew:*)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
-    "blockedPaths": [
-      ".env",
-      ".env.production",
-      "~/.ssh",
-      "/etc"
+    "deny": [
+      "Read(./.env*)",
+      "Read(./secrets/**)",
+      "Write(./.env*)",
+      "Bash(sudo:*)",
+      "Bash(git push:*)"
+    ],
+    "ask": [
+      "Bash(git checkout:*)"
+    ]
+  },
+  "env": {
+    "SPRING_PROFILES_ACTIVE": "local"
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./gradlew ktlintFormat"
+          }
+        ]
+      }
     ]
   }
 }
 ```
 
-**동작 방식:**
-- `blockedCommands`: 최우선 차단 (다른 설정 무시)
-- `allowedCommands`: 정의 시 화이트리스트 방식 (명시된 것만 허용)
-- `allowedCommands` 미정의 시: 블랙리스트 방식 (blockedCommands만 차단)
-
-#### 3. toolApprovalPolicy (선택적)
-도구 실행 승인 정책
-
+**개인 `.claude/settings.local.json` (Git 제외)**
 ```json
 {
-  "toolApprovalPolicy": {
-    "autoApprove": [
-      "Read",
-      "Glob",
-      "Grep"
-    ],
-    "alwaysAsk": [
-      "Write",
-      "Edit",
-      "Bash"
-    ]
-  }
-}
-```
-
-**우선순위:** `alwaysAsk` > `autoApprove`
-
-#### 4. security (선택적)
-전역 보안 설정
-
-```json
-{
-  "security": {
-    "dangerouslyAllowAnyCommand": false,
-    "requireExplicitFileAccess": true,
-    "allowNetworkAccess": false
-  }
-}
-```
-
----
-
-## 실행 메커니즘
-
-### 전체 흐름도
-
-```
-사용자가 claude-code 실행
-    ↓
-┌─────────────────────────────────────┐
-│ 1. 초기화 단계 (한 번만)             │
-│  ├─ .claude/settings.json 파싱      │
-│  ├─ JSON 스키마 검증                │
-│  ├─ MCP 서버 프로세스 시작           │
-│  └─ 각 서버에서 도구 목록 수집       │
-└─────────────────┬───────────────────┘
-                  ↓
-┌─────────────────────────────────────┐
-│ 2. Claude 모델 초기화                │
-│  └─ 사용 가능한 전체 도구 목록 전달  │
-└─────────────────┬───────────────────┘
-                  ↓
-┌─────────────────────────────────────┐
-│ 3. 사용자 요청 처리 (반복)           │
-│  ├─ Claude가 도구 호출 결정          │
-│  ├─ CLI가 권한 검증                  │
-│  ├─ 필요시 사용자 승인 요청          │
-│  └─ 도구 실행 및 결과 반환           │
-└─────────────────────────────────────┘
-```
-
-### 1. 초기화 단계 (claude-code 실행 시)
-
-```javascript
-// 의사 코드
-async function initializeCLI() {
-  // 1단계: settings.json 로드
-  const settingsPath = '.claude/settings.json';
-  const settings = JSON.parse(fs.readFileSync(settingsPath));
-  
-  // 2단계: 스키마 검증
-  if (!settings.mcpServers || typeof settings.mcpServers !== 'object') {
-    throw new Error('Invalid settings.json: mcpServers must be an object');
-  }
-  
-  // 3단계: MCP 서버 시작
-  const mcpClients = {};
-  for (const [name, config] of Object.entries(settings.mcpServers)) {
-    // 자식 프로세스 생성
-    const process = spawn(config.command, config.args, {
-      env: { ...process.env, ...config.env },
-      stdio: ['pipe', 'pipe', 'pipe']  // stdin, stdout, stderr
-    });
-    
-    // JSON-RPC 2.0 통신 클라이언트 생성
-    mcpClients[name] = new McpClient(process.stdin, process.stdout);
-  }
-  
-  // 4단계: 각 MCP 서버에서 도구 목록 가져오기
-  const allTools = [];
-  for (const client of Object.values(mcpClients)) {
-    const response = await client.request({
-      jsonrpc: '2.0',
-      method: 'tools/list',
-      id: 1
-    });
-    allTools.push(...response.result.tools);
-  }
-  
-  // 5단계: 메모리에 저장 (이후 재사용)
-  return {
-    settings,        // 권한 검증용
-    mcpClients,      // 도구 실행용
-    allTools         // Claude 모델에 전달
-  };
-}
-```
-
-**중요:** settings.json은 시작 시 한 번만 로드되어 메모리에 상주합니다.
-
-### 2. 도구 실행 단계 (매 호출마다)
-
-```javascript
-async function executeTool(toolName, toolArgs, context) {
-  const { settings } = context;
-  
-  // 1단계: 보안 정책 체크 (최우선)
-  if (settings.security?.dangerouslyAllowAnyCommand === false) {
-    // 추가 검증 수행
-  }
-  
-  // 2단계: 권한 정책 체크
-  if (toolName === 'Bash') {
-    const command = toolArgs.command;
-    
-    // 차단 명령어 체크
-    if (settings.permissionPolicy?.blockedCommands) {
-      for (const blocked of settings.permissionPolicy.blockedCommands) {
-        if (command.includes(blocked)) {
-          throw new Error(`Blocked command: ${blocked}`);
-        }
-      }
-    }
-    
-    // 허용 명령어 체크 (정의된 경우만)
-    if (settings.permissionPolicy?.allowedCommands) {
-      const isAllowed = settings.permissionPolicy.allowedCommands.some(
-        allowed => command.startsWith(allowed)
-      );
-      if (!isAllowed) {
-        throw new Error(`Command not in allowedCommands: ${command}`);
-      }
-    }
-  }
-  
-  // 3단계: 승인 정책 체크
-  if (settings.toolApprovalPolicy?.alwaysAsk?.includes(toolName)) {
-    const approved = await promptUser(`Execute ${toolName}?\n${JSON.stringify(toolArgs)}\n(y/n): `);
-    if (!approved) {
-      throw new Error('User rejected tool execution');
-    }
-  } else if (!settings.toolApprovalPolicy?.autoApprove?.includes(toolName)) {
-    // 명시적으로 autoApprove에 없으면 기본적으로 물어봄 (안전 우선)
-    const approved = await promptUser(`Execute ${toolName}? (y/n): `);
-    if (!approved) {
-      throw new Error('User rejected tool execution');
-    }
-  }
-  
-  // 4단계: 실제 도구 실행
-  return await executeToolInternal(toolName, toolArgs);
-}
-```
-
-### 검증 우선순위
-
-```
-security (전역 보안)
-    ↓
-permissionPolicy.blockedCommands (명시적 차단)
-    ↓
-permissionPolicy.allowedCommands (화이트리스트)
-    ↓
-toolApprovalPolicy.alwaysAsk (사용자 승인 필수)
-    ↓
-toolApprovalPolicy.autoApprove (자동 승인)
-    ↓
-기본 동작 (사용자에게 물어봄)
-```
-
----
-
-## 설정 수정 및 적용
-
-### 수정 시점
-
-| 수정 방법 | 시점 | 적용 |
-|----------|------|------|
-| 사용자 직접 편집 | 언제든지 | 다음 실행 시 |
-| CLI 초기 설정 | 첫 실행 시 | 즉시 |
-| 설정 명령어 | CLI 버전에 따라 다름 | 즉시 또는 다음 실행 시 |
-
-### 사용자 직접 수정 (주요 방법)
-
-```bash
-# 에디터로 편집
-vi .claude/settings.json
-code .claude/settings.json
-
-# 다음 실행 시 적용됨
-claude-code
-```
-
-**중요 사항:**
-- 현재 실행 중인 세션에는 적용 안 됨
-- 설정 변경 후 CLI 재시작 필요
-- JSON 문법 오류 시 CLI 시작 실패
-
-### 적용 확인
-
-```bash
-# 1. 잘못된 설정으로 테스트
-echo '{"mcpServers": "invalid"}' > .claude/settings.json
-claude-code
-# → 에러 메시지로 스키마 확인 가능
-
-# 2. 권한 테스트
-# settings.json에 allowedCommands: ["git"] 설정 후
-claude-code
-# → "npm install" 시도 시 차단되는지 확인
-
-# 3. 로그 확인 (verbose 모드)
-claude-code --verbose
-```
-
-### 핫 리로드 미지원
-
-```bash
-# 터미널 1: Claude Code 실행 중
-claude-code
-
-# 터미널 2: 설정 수정
-echo '{"mcpServers": {...}}' > .claude/settings.json
-
-# 터미널 1: 변경사항 적용 안 됨 (메모리에 이미 로드됨)
-# → 세션 종료 후 재시작 필요
-```
-
----
-
-## 실전 활용 전략
-
-### 1. 프로젝트 타입별 템플릿 관리
-
-#### 디렉토리 구조
-```bash
-~/.claude-templates/
-├── backend-spring.json
-├── backend-kotlin.json
-├── frontend-react.json
-├── data-pipeline.json
-└── review-only.json
-```
-
-#### Spring Boot 백엔드 템플릿
-```json
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
-    },
-    "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_TOKEN": "your_token"
-      }
-    }
-  },
-  "permissionPolicy": {
-    "allowedCommands": [
-      "./gradlew",
-      "git",
-      "docker",
-      "kubectl"
-    ],
-    "blockedPaths": [
-      "src/main/resources/application-prod.yml",
-      "src/main/resources/application-prod.properties",
-      ".env.production"
+  "permissions": {
+    "allow": [
+      "Bash(git push origin feature/*)"
     ]
   },
-  "toolApprovalPolicy": {
-    "autoApprove": ["Read", "Grep", "Glob"],
-    "alwaysAsk": ["Write", "Edit", "Bash"]
+  "env": {
+    "DEBUG": "true"
   }
 }
 ```
 
-#### 데이터 파이프라인 템플릿
-```json
+**`.gitignore` 추가**
+```gitignore
+.claude/settings.local.json
+```
+
+### 4.2 표준화 전략
+
+**이 설정의 철학:**
+1. **읽기는 자유, 쓰기는 제한적**: 코드 이해를 막지 않되, 수정은 소스 디렉토리만
+2. **민감 정보 완전 차단**: `.env`, `secrets/` 접근 불가
+3. **위험한 작업 차단**: push, sudo 등 팀에 영향 주는 작업 차단
+4. **자동 포맷팅**: 파일 수정 시 자동으로 ktlint 실행
+5. **로컬 환경 분리**: 개인화는 settings.local.json으로
+
+**팀원 온보딩:**
+```bash
+# 1. 프로젝트 클론
+git clone <repository>
+
+# 2. settings.json은 자동으로 로드됨
+# 3. 필요시 개인 설정 추가
+cat > .claude/settings.local.json << EOF
 {
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
-    }
-  },
-  "permissionPolicy": {
-    "allowedCommands": [
-      "python",
-      "spark-submit",
-      "airflow",
-      "git"
-    ],
-    "blockedCommands": [
-      "hbase shell",
-      "DROP TABLE"
-    ]
-  },
-  "toolApprovalPolicy": {
-    "autoApprove": ["Read", "Grep", "Glob", "Bash"],
-    "alwaysAsk": ["Write"]
+  "env": {
+    "MY_CUSTOM_VAR": "value"
   }
 }
+EOF
 ```
 
-#### 코드 리뷰 전용 템플릿
-```json
-{
-  "mcpServers": {
-    "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_TOKEN": "your_token"
-      }
-    }
-  },
-  "permissionPolicy": {
-    "allowedCommands": ["git", "gh"],
-    "blockedCommands": ["git push", "git commit"]
-  },
-  "toolApprovalPolicy": {
-    "autoApprove": ["Read", "Grep", "Glob"],
-    "alwaysAsk": ["Write", "Edit", "Bash"]
-  }
-}
-```
+## 5. 설정 관리 명령어
 
-#### 템플릿 적용 스크립트
+### 5.1 대화형 설정 관리
+
 ```bash
-#!/bin/bash
-# setup-claude.sh
-
-TEMPLATE=$1
-
-if [ -z "$TEMPLATE" ]; then
-  echo "Usage: $0 <template-name>"
-  echo "Available templates:"
-  ls ~/.claude-templates/
-  exit 1
-fi
-
-TEMPLATE_FILE=~/.claude-templates/${TEMPLATE}.json
-
-if [ ! -f "$TEMPLATE_FILE" ]; then
-  echo "Template not found: $TEMPLATE_FILE"
-  exit 1
-fi
-
-mkdir -p .claude
-cp "$TEMPLATE_FILE" .claude/settings.json
-
-# 환경 변수 치환 (필요시)
-if [ -n "$GITHUB_TOKEN" ]; then
-  sed -i '' "s/your_token/$GITHUB_TOKEN/" .claude/settings.json
-fi
-
-echo "Claude settings configured with template: $TEMPLATE"
-echo "Run 'claude-code' to start."
+/config          # 탭 형태 Settings UI 열기
+/permissions     # 실시간 권한 관리 (재시작 불필요)
+/allowed-tools   # 도구 권한 관리 (/allowed-tools add Edit)
+/hooks           # Hook 설정 메뉴
 ```
 
-**사용 예:**
-```bash
-# 새 프로젝트 시작
-cd my-spring-project
-setup-claude.sh backend-spring
+### 5.2 권한 모드 전환
 
-# 코드 리뷰 시작
-cd target-repository
-setup-claude.sh review-only
+**`Shift+Tab`으로 순환:**
+- **Normal mode**: 기본 모드, permissions 규칙 적용
+- **Plan mode**: 파일 분석만 가능, 수정/실행 불가
+- **bypassPermissions mode**: 모든 권한 자동 승인 (매우 위험!)
 
-claude-code
-```
+**플래그:**
+- `--dangerously-skip-permissions`: 모든 권한 검사 우회 (격리된 환경 전용)
+- `disableBypassPermissionsMode: "disable"`: bypassPermissions 모드 차단
 
-### 2. 작업 모드별 설정 전환
+## 6. 문제 해결
 
-#### 개발 모드 (편의성 우선)
-```json
-{
-  "mcpServers": {
-    "filesystem": { /* ... */ },
-    "github": { /* ... */ }
-  },
-  "permissionPolicy": {
-    "blockedCommands": ["rm -rf /", "sudo rm", "> /dev/sda"],
-    "blockedPaths": [".env.production", "/etc", "~/.ssh"]
-  },
-  "toolApprovalPolicy": {
-    "autoApprove": ["Read", "Write", "Edit", "Grep", "Glob", "Bash"]
-  }
-}
-```
-
-#### 프로덕션 모드 (안전성 우선)
-```json
-{
-  "mcpServers": {
-    "filesystem": { /* ... */ }
-  },
-  "permissionPolicy": {
-    "allowedCommands": ["git status", "git diff", "git log"],
-    "allowedPaths": ["/workspace/readonly"]
-  },
-  "toolApprovalPolicy": {
-    "autoApprove": ["Read", "Grep", "Glob"],
-    "alwaysAsk": ["Write", "Edit", "Bash"]
-  },
-  "security": {
-    "dangerouslyAllowAnyCommand": false,
-    "requireExplicitFileAccess": true
-  }
-}
-```
-
-#### 모드 전환 스크립트
-```bash
-#!/bin/bash
-# switch-mode.sh
-
-MODE=$1
-
-case $MODE in
-  dev)
-    cp .claude/settings.dev.json .claude/settings.json
-    echo "Switched to DEVELOPMENT mode (편의성 우선)"
-    ;;
-  prod)
-    cp .claude/settings.prod.json .claude/settings.json
-    echo "Switched to PRODUCTION mode (안전성 우선)"
-    ;;
-  review)
-    cp .claude/settings.review.json .claude/settings.json
-    echo "Switched to REVIEW mode (읽기 전용)"
-    ;;
-  *)
-    echo "Usage: $0 {dev|prod|review}"
-    exit 1
-    ;;
-esac
-
-echo "Restart claude-code to apply changes."
-```
-
-### 3. 안전 장치 설정 (필수 권장)
-
-```json
-{
-  "mcpServers": { /* ... */ },
-  "permissionPolicy": {
-    "blockedCommands": [
-      "rm -rf",
-      "sudo",
-      "chmod 777",
-      "chmod -R 777",
-      "> /dev/sda",
-      "dd if=",
-      "mkfs",
-      ":(){ :|:& };:",
-      "curl | sh",
-      "wget | sh"
-    ],
-    "blockedPaths": [
-      ".env",
-      ".env.local",
-      ".env.production",
-      ".env.staging",
-      "*/secrets/*",
-      "*/credentials/*",
-      "~/.ssh",
-      "~/.aws",
-      "/etc",
-      "/System",
-      "/usr/bin",
-      "/usr/sbin"
-    ]
-  },
-  "toolApprovalPolicy": {
-    "alwaysAsk": ["Bash", "Write", "Edit"]
-  }
-}
-```
-
-**효과:**
-- 실수로 시스템 파일 삭제 방지
-- 위험한 셸 명령어 실행 차단
-- 민감한 설정 파일 접근 불가
-- 중요 파일 수정 시 반드시 승인 필요
-
-### 4. MCP 서버 선택적 로드
-
-#### 최소 구성 (기본)
-```json
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
-    }
-  }
-}
-```
-
-#### 필요시 주석 해제 방식
-```json
-{
-  "mcpServers": {
-    // 항상 활성화
-    "filesystem": { /* ... */ },
-    
-    // GitHub 작업 시에만 활성화
-    // "github": {
-    //   "command": "npx",
-    //   "args": ["-y", "@modelcontextprotocol/server-github"],
-    //   "env": {
-    //     "GITHUB_TOKEN": "your_token"
-    //   }
-    // },
-    
-    // Slack 연동 시에만 활성화
-    // "slack": {
-    //   "command": "npx",
-    //   "args": ["-y", "@modelcontextprotocol/server-slack"],
-    //   "env": {
-    //     "SLACK_TOKEN": "your_token"
-    //   }
-    // }
-  }
-}
-```
-
-**장점:**
-- CLI 시작 속도 향상
-- 메모리 사용량 감소
-- Claude가 불필요한 도구로 혼란스러워하는 것 방지
-
-### 5. 환경별 MCP 설정
-
-#### GitHub Enterprise 환경
-```json
-{
-  "mcpServers": {
-    "github-enterprise": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_TOKEN": "your_ghe_token",
-        "GITHUB_API_URL": "https://github.company.com/api/v3"
-      }
-    }
-  }
-}
-```
-
-#### 내부 데이터베이스 연결
-```json
-{
-  "mcpServers": {
-    "internal-db": {
-      "command": "node",
-      "args": ["/opt/mcp-servers/hbase-readonly-server.js"],
-      "env": {
-        "HBASE_ZOOKEEPER": "zk1.internal:2181,zk2.internal:2181",
-        "DB_READ_ONLY": "true",
-        "MAX_ROWS": "1000"
-      }
-    }
-  }
-}
-```
-
-### 6. 주기적 리셋 루틴
-
-#### 수동 정리 체크리스트
-```bash
-# 1. .claude 디렉토리 백업
-cp -r .claude .claude.backup.$(date +%Y%m%d)
-
-# 2. 현재 설정 확인
-cat .claude/settings.json | jq '.mcpServers | keys'
-
-# 3. 사용하지 않는 MCP 서버 제거
-# settings.json 편집
-
-# 4. 테스트 후 백업 삭제
-rm -rf .claude.backup.*
-```
-
-#### 자동화 스크립트
-```bash
-#!/bin/bash
-# reset-claude.sh
-
-# 백업
-BACKUP_DIR=".claude.backup.$(date +%Y%m%d_%H%M%S)"
-cp -r .claude "$BACKUP_DIR"
-echo "Backup created: $BACKUP_DIR"
-
-# 기본 템플릿으로 초기화
-cp ~/.claude-templates/minimal.json .claude/settings.json
-
-echo "Claude settings reset to minimal configuration."
-echo "Backup available at: $BACKUP_DIR"
-echo "To restore: cp -r $BACKUP_DIR .claude"
-```
-
-**실행 주기:** 월 1회 또는 프레임워크 테스트 후
-
-### 7. 도구 명시적 사용 패턴
-
-#### AskUserQuestion 활용
-```
-"API 설계 전에 AskUserQuestion 도구를 사용해서 다음 선택지를 제시해줘:
-1. 응답 형식: JSON / Protocol Buffers / MessagePack
-2. 페이징 방식: offset-based / cursor-based
-3. 에러 코드 체계: HTTP only / Custom error codes
-각 옵션의 장단점도 함께 설명해줘."
-```
-
-#### TodoWrite 강제 사용
-```
-"대규모 리팩토링 시작 전에:
-1. TodoWrite로 전체 작업 계획 수립
-2. 각 단계별 의존성 표시
-3. 예상 소요 시간 명시
-4. 완료 여부를 실시간으로 추적
-
-작업 진행하면서 각 단계 완료할 때마다 TodoWrite 업데이트해줘."
-```
-
-#### Explore 에이전트 활용
-```
-"Task(Explore) 도구로 먼저 코드베이스 탐색해줘:
-1. HBase 연결 패턴 찾기
-2. 기존 bulk delete 구현 확인
-3. 에러 처리 방식 분석
-
-탐색 완료 후 결과를 요약해주고, 그 다음에 구현 시작하자."
-```
-
-### 8. 프로젝트 루트 표시
-
-#### .claude 존재 여부로 프로젝트 루트 식별
-```bash
-# 현재 디렉토리가 Claude Code 프로젝트인지 확인
-if [ -d ".claude" ]; then
-  echo "✓ Claude Code project detected"
-  claude-code
-else
-  echo "✗ Not a Claude Code project"
-  echo "Run 'setup-claude.sh <template>' to initialize"
-fi
-```
-
-#### Git hook 활용
-```bash
-# .git/hooks/post-checkout
-#!/bin/bash
-# 브랜치 전환 시 Claude 설정 확인
-
-if [ ! -f ".claude/settings.json" ]; then
-  echo "⚠️  Warning: No Claude settings found in this branch"
-  echo "   Consider running 'setup-claude.sh' to initialize"
-fi
-```
-
----
-
-## 문제 해결
-
-### 일반적인 오류
-
-#### 1. CLI 시작 실패
-```bash
-Error: Failed to parse .claude/settings.json
-```
-
-**원인:** JSON 문법 오류
-
-**해결:**
-```bash
-# JSON 유효성 검증
-cat .claude/settings.json | jq .
-
-# 오류 있으면 복구
-cp .claude.backup.*/settings.json .claude/settings.json
-
-# 또는 최소 구성으로 초기화
-echo '{
-  "mcpServers": {}
-}' > .claude/settings.json
-```
-
-#### 2. MCP 서버 시작 실패
-```bash
-Error: Failed to start MCP server "github"
-```
-
-**원인:**
-- MCP 서버 패키지 미설치
-- 환경 변수 누락
-- 잘못된 command/args
-
-**해결:**
-```bash
-# 수동으로 MCP 서버 실행 테스트
-npx -y @modelcontextprotocol/server-github
-# 오류 메시지 확인
-
-# 환경 변수 확인
-echo $GITHUB_TOKEN
-
-# settings.json에서 해당 서버 제거 또는 수정
-```
-
-#### 3. 권한 거부
-```bash
-Error: Command not in allowedCommands: npm
-```
-
-**원인:** permissionPolicy 제약
-
-**해결:**
-```json
-{
-  "permissionPolicy": {
-    "allowedCommands": ["git", "npm", "추가할명령어"]
-  }
-}
-```
-
-#### 4. 도구 실행 차단
-```bash
-Error: Tool execution blocked by security policy
-```
-
-**원인:** toolApprovalPolicy 또는 security 설정
-
-**해결:**
-```json
-{
-  "toolApprovalPolicy": {
-    "autoApprove": ["차단된도구명"]
-  }
-}
-```
-
-### 디버깅 방법
-
-#### 1. Verbose 모드
-```bash
-claude-code --verbose
-# 또는
-CLAUDE_LOG_LEVEL=debug claude-code
-```
-
-#### 2. 로그 확인
-```bash
-# 로그 위치 (예시, 환경에 따라 다름)
-tail -f ~/.claude/logs/session.log
-tail -f ~/.claude/logs/mcp.log
-```
-
-#### 3. 최소 설정으로 테스트
-```json
-{
-  "mcpServers": {}
-}
-```
-
-#### 4. MCP 서버 개별 테스트
-```bash
-# MCP 서버를 직접 실행하여 오류 확인
-npx -y @modelcontextprotocol/server-filesystem /tmp
-
-# JSON-RPC 요청 수동 전송
-echo '{"jsonrpc":"2.0","method":"tools/list","id":1}' | \
-  npx -y @modelcontextprotocol/server-filesystem /tmp
-```
-
-### 설정 검증 체크리스트
+### 6.1 설정이 적용되지 않을 때
 
 ```bash
 # 1. JSON 문법 검증
-jq . .claude/settings.json > /dev/null && echo "✓ Valid JSON" || echo "✗ Invalid JSON"
-
-# 2. 필수 필드 확인
-jq 'has("mcpServers")' .claude/settings.json
-
-# 3. MCP 서버 스키마 확인
-jq '.mcpServers | to_entries[] | select(.value.command == null or .value.args == null)' .claude/settings.json
-
-# 4. 권한 설정 확인
-jq '.permissionPolicy' .claude/settings.json
-
-# 5. 전체 구조 시각화
-jq 'keys' .claude/settings.json
-```
-
-### 복구 절차
-
-#### 설정 손상 시
-```bash
-# 1. 백업에서 복구
-cp .claude.backup.YYYYMMDD/settings.json .claude/settings.json
-
-# 2. 기본 설정으로 초기화
-echo '{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
-    }
-  }
-}' > .claude/settings.json
-
-# 3. 검증 후 재시작
 jq . .claude/settings.json
-claude-code
+
+# 2. Claude Code 재시작 (필수)
+# settings.json 변경은 재시작 후에만 적용
+
+# 3. 우선순위 확인
+cat ~/.claude/settings.json           # 사용자 설정
+cat .claude/settings.json              # 프로젝트 설정
+cat .claude/settings.local.json       # 로컬 설정
 ```
 
----
-
-## 참고 자료
-
-### 공식 문서
-- Claude Code: https://docs.claude.com/en/docs/claude-code
-- MCP 프로토콜: https://spec.modelcontextprotocol.io/
-- MCP 서버 목록: https://github.com/modelcontextprotocol/servers
-
-### 유용한 명령어
+### 6.2 Hook 디버깅
 
 ```bash
-# Claude Code 버전 확인
-claude-code --version
+# Hook 명령어 직접 테스트
+echo '{"tool_input":{"file_path":"test.ts"}}' | jq -r '.tool_input.file_path'
 
-# 도움말
-claude-code --help
-
-# MCP 서버 목록 확인 (CLI 내에서)
-# "너가 가지고 있는 도구 전체 목록을 보여줘"
-
-# 설정 파일 위치
-ls -la .claude/
-
-# 전역 npm 패키지 확인
-npm list -g --depth=0 | grep claude
-```
-
-### 환경 변수
-
-```bash
-# GitHub Token
-export GITHUB_TOKEN="ghp_your_token"
-
-# 로그 레벨
-export CLAUDE_LOG_LEVEL="debug"
-
-# MCP 서버 타임아웃
-export MCP_TIMEOUT="30000"
+# 로그 파일로 디버깅
+{
+  "type": "command",
+  "command": "echo \"$CLAUDE_TOOL_NAME: $CLAUDE_FILE_PATHS\" >> /tmp/claude_debug.log"
+}
 ```
 
 ---
 
-## 핵심 체크리스트
+## 핵심 키워드
 
-### 프로젝트 시작 시
-- [ ] 프로젝트 타입에 맞는 템플릿 선택
-- [ ] settings.json 생성 및 검증
-- [ ] 안전 장치 설정 (blockedCommands, blockedPaths)
-- [ ] MCP 서버 환경 변수 설정
-- [ ] JSON 문법 검증 (`jq . .claude/settings.json`)
+**설정 계층**
+- Enterprise > 프로젝트 로컬 > 프로젝트 > 사용자
+- deny > allow 우선순위
+- 재시작 필요 (Hot reload 미지원)
 
-### 주기적 점검 (월 1회)
-- [ ] 사용하지 않는 MCP 서버 제거
-- [ ] 권한 정책 재검토
-- [ ] 설정 백업
-- [ ] 도구 사용 로그 분석
+**Permissions**
+- gitignore 문법 (`**`, `*`)
+- 도구별 세분화 (Read, Write, Edit, Bash)
+- 런타임 변경 (`/permissions`)
 
-### 문제 발생 시
-- [ ] JSON 문법 오류 확인
-- [ ] MCP 서버 개별 테스트
-- [ ] Verbose 모드로 실행
-- [ ] 최소 설정으로 격리 테스트
-- [ ] 백업에서 복구
+**Hooks**
+- PreToolUse (차단 가능), PostToolUse (자동화)
+- Exit code 제어 (0/1/2)
+- 환경 변수 활용 ($CLAUDE_FILE_PATHS)
 
----
+**CLAUDE.md**
+- 계층적 로딩 (전역 > 프로젝트 > 서브디렉토리)
+- 프로젝트 특화 정보만
+- `#` 키로 동적 업데이트
 
-## 마무리
+**MCP**
+- Model Context Protocol
+- `.mcp.json` 표준 위치
+- Docker/npx로 서버 실행
 
-이 문서는 Claude Code CLI의 settings.json 메커니즘과 실전 활용 전략을 정리한 것입니다.
+**협업**
+- settings.json: 팀 공유 (Git 체크인)
+- settings.local.json: 개인화 (Git 제외)
+- CLAUDE.md: 프로젝트 지식 공유
 
-**핵심 원칙:**
-1. settings.json은 명확한 스키마를 가진 구조화된 설정 파일
-2. CLI 시작 시 한 번 로드되어 메모리에 상주
-3. 설정 변경은 CLI 재시작 후 적용
-4. 안전성과 편의성의 균형을 프로젝트 특성에 맞게 조정
 
-**권장 워크플로우:**
-1. 프로젝트 타입별 템플릿 준비
-2. 작업 모드별 설정 전환 스크립트 작성
-3. 안전 장치를 기본으로 설정
-4. 주기적인 설정 정리 및 최적화
